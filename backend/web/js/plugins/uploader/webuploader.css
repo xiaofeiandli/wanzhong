@@ -1,0 +1,123 @@
+.webuploader-container {
+	position: relative;
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	background: #3598dc;
+	padding: 4px 10px 5px 10px;
+	color: #fff;
+	text-align: center;
+	border-radius: 3px;
+	overflow: hidden;
+}
+#picker{
+	height: 27px;
+	padding: 0;
+	overflow: hidden;
+}
+
+.webuploader-pick-hover {
+	background: #2386ca;
+}
+
+.webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events:none;
+}
+
+.uploader-list .file-item {
+	float: left;
+	position: relative;
+	margin: 0 20px 20px 0;
+}
+.uploader-list .file-item .info{
+	position: absolute;
+	left: 4px;
+	bottom: 4px;
+	right: 4px;
+	height: 20px;
+	line-height: 20px;
+	text-indent: 5px;
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 12px;
+}
+.uploader-list .file-item .error,
+.uploader-list .file-item .state{
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	right: 4px;
+	color: white;
+	text-align: center;
+	height: 20px;
+	font-size: 12px;
+	line-height: 20px;
+}
+.uploader-list .file-item .state{
+	background-color: green;
+}
+.uploader-list .file-item .error{
+	background: red;
+}
+.uploader-list{
+	border: 1px solid #e5e5e5;
+	min-height: 150px;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 5px !important;
+}
+.file-item .file-remove,
+.file-item .file-success{
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	width: 18px;
+	height: 18px;
+
+	color: #fff;
+
+
+	text-align: center;
+	border-radius: 50% !important;
+	background-color: #bbb;
+}
+.file-item .file-success{
+	color: green;
+	background-color: transparent;
+}
+.file-item .file-success .fa{
+	font-size: 18px !important;
+	line-height: 18px;
+}
+/*进度条*/
+.file-item .progress{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -10px;
+	height: 5px;
+	margin: 0;
+}
+.uploader-action #upload,
+.uploader-action #reload,
+.uploader-action.has-fail #picker{
+	display: none;
+}
+.uploader-action.has-files #upload{
+	display: inline-block;
+}
+.uploader-action.has-fail #reload{
+	display: inline-block;
+}
+
