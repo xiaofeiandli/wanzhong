@@ -1,6 +1,6 @@
 <?php
 use yii\web\View;
-$this->title = '下载管理';
+$this->title = '资源管理';
 $this->registerCssFile("@web/css/plugins/fancybox/source/jquery.fancybox.css");
 $this->registerCssFile("@web/css/plugins/portfolio.css");
 $this->registerCssFile("@web/js/plugins/bootstrap-fileinput/bootstrap-fileinput.css");

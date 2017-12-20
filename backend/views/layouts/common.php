@@ -8,7 +8,7 @@ AppAsset::register($this);
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8"/>
-    <title><?= Html::encode($this->title) ?>_GFM后台管理</title>
+    <title><?= Html::encode($this->title) ?>_能见管理后台</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
@@ -27,12 +27,15 @@ AppAsset::register($this);
 <body class="page-header-fixed page-quick-sidebar-over-content">
 <div class="page-header navbar navbar-fixed-top">
     <div class="page-header-inner">
-        <div class="page-logo">
+        <a class="navbar-brand" href="/" style="margin-left: 10px;font-size: 18px;color: #ccc;">
+            能见管理后台
+        </a>
+        <!-- <div class="page-logo">
             <a href="/">
-                <img src="/images/logo.png" alt="logo" style="width: 100px;margin-top: 7px;" class="logo-default"/>
+                <img src="/images/logo.png" alt="logo" style="width: 100px;margin-top: 7px;width:44px;height: 35px;" class="logo-default"/>
             </a>
             <div class="menu-toggler sidebar-toggler hide"></div>
-        </div>
+        </div> -->
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
         </a>
         <div class="top-menu">
@@ -75,35 +78,6 @@ AppAsset::register($this);
                         <?php }?>
                     </a>
                 </li>
-                <?php if($this->params['open']==2){?>
-                <li <?php if(isset($this->params['item'])&&$this->params['item']=='navigator'){echo "class='active'";}?>>
-                    <a href="/navigator/index">
-                        <i class="glyphicon glyphicon-th-large"></i>
-                        <span class="title">导航管理</span>
-                        <?php if(isset($this->params['item'])&&$this->params['item']=='navigator'){?>
-                            <span class="selected"></span>
-                        <?php }?>
-                    </a>
-                </li>
-                <li <?php if(isset($this->params['item'])&&$this->params['item']=='category'){echo "class='active'";}?>>
-                    <a href="/category/index">
-                        <i class="glyphicon glyphicon-th-list"></i>
-                        <span class="title">栏目管理</span>
-                        <?php if(isset($this->params['item'])&&$this->params['item']=='category'){?>
-                            <span class="selected"></span>
-                        <?php }?>
-                    </a>
-                </li>
-                <li <?php if(isset($this->params['item'])&&$this->params['item']=='article_list'){echo "class='active'";}?>>
-                    <a href="/article/list/1">
-                        <i class="glyphicon glyphicon-file"></i>
-                        <span class="title">模版文章</span>
-                        <?php if(isset($this->params['item'])&&$this->params['item']=='article_list'){?>
-                            <span class="selected"></span>
-                        <?php }?>
-                    </a>
-                </li>
-                <?php }?>
                 <li <?php if(isset($this->params['item'])&&$this->params['item']=='article'){echo "class='active'";}?>>
                     <a href="/article/index/1">
                         <i class="glyphicon glyphicon-pencil"></i>
@@ -113,21 +87,11 @@ AppAsset::register($this);
                         <?php }?>
                     </a>
                 </li>
-                
                 <li <?php if(isset($this->params['item'])&&$this->params['item']=='resource'){echo "class='active'";}?>>
                     <a href="/resource/index">
                         <i class="glyphicon glyphicon-download-alt"></i>
-                        <span class="title">下载管理</span>
+                        <span class="title">资源管理</span>
                         <?php if(isset($this->params['item'])&&$this->params['item']=='resource'){?>
-                            <span class="selected"></span>
-                        <?php }?>
-                    </a>
-                </li>
-                <li <?php if(isset($this->params['item'])&&$this->params['item']=='application'){echo "class='active'";}?>>
-                    <a href="/application/index/0/1">
-                        <i class="glyphicon glyphicon-globe"></i>
-                        <span class="title">报名管理</span>
-                        <?php if(isset($this->params['item'])&&$this->params['item']=='application'){?>
                             <span class="selected"></span>
                         <?php }?>
                     </a>
@@ -151,38 +115,7 @@ AppAsset::register($this);
                     <?php if(isset($this->params['item'])&&$this->params['item']=='resource'){?>
                     <div class="pull-right">
                         <span class="btn blue" id="images"><i class="fa fa-picture-o"></i> 图片上传</span>
-                        <a class="btn blue" data-toggle="modal" href="#pdf_modal"><i class="fa fa-upload"></i> 文件上传</a>
-                    </div>
-                    <?php }elseif(isset($this->params['item'])&&$this->params['item']=='category'){?>
-                    <div class="pull-right">
-                        <span class="btn green" id="add_cate"><i class="fa fa-plus"></i> 添加栏目</span>
-                    </div>
-                    <?php }elseif(isset($this->params['item'])&&$this->params['item']=='navigator'){?>
-                    <div class="pull-right">
-                        <span class="btn green" id="add_nav" data-toggle="modal" href="#modals"><i class="fa fa-plus"></i> 添加导航</span>
-                    </div>
-                    <?php }elseif(isset($this->params['item'])&&$this->params['item']=='application'){?>
-                    <div class="pull-right">
-                        <?php
-                            $type = Yii::$app->request->get('type',0);
-                            if($type==0){
-                                $tmp_name = '个人';
-                            }elseif($type==1){
-                                $tmp_name = '媒体';
-                            }elseif($type==2){
-                                $tmp_name = '展商';
-                            }else{
-                                $tmp_name = '现场';
-                            }
-                        ?>
-                        <?php if($type==3){?>
-                        <a class="btn grey-cascade" id="create_qrcode" data-toggle="modal" href="#qrcode_modal"><i class="fa fa-qrcode"></i> 批量生成<?=$tmp_name?>报名二维码
-                        </a>
-                        <?php }?>
-                        <a class="btn grey-cascade" id="down_qrcode" data-toggle="modal" href="<?php if(isset($this->params['application_total'])&&$this->params['application_total']>0){echo '/application/downqrcode/'.$type;}else{echo 'javascript:;';}?>"><i class="fa fa-qrcode"></i> 下载<?=$tmp_name?>报名二维码
-                        </a>
-                        <a class="btn grey-cascade" id="down_excel" href="<?php if(isset($this->params['application_total'])&&$this->params['application_total']>0){echo '/application/export/'.$type;}else{echo 'javascript:;';}?>" download><i class="fa fa-file-excel-o"></i> 下载<?=$tmp_name?>报名表
-                        </a>
+                        <a class="btn blue" data-toggle="modal" href="#pdf_modal"><i class="fa fa-upload"></i> 资源上传</a>
                     </div>
                     <?php }?>
                     <ul class="page-breadcrumb">
@@ -197,7 +130,7 @@ AppAsset::register($this);
 </div>
 <div class="page-footer">
     <div class="page-footer-inner">
-        Copyright &copy; 未来出行
+        Copyright &copy; 万中音乐
     </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>

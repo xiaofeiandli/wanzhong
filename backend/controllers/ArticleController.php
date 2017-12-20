@@ -9,7 +9,6 @@ use backend\models\Manager;
 
 /**
  * 文章管理
- * 作者：youweiyan<youweiyan@nengapp.com>
  */
 class ArticleController extends BaseController
 {
@@ -21,30 +20,15 @@ class ArticleController extends BaseController
         }
         $view = Yii::$app->view;
         $view->params['item'] = 'article';
-        $view->params['open'] = $this->isOpen($this->isLogin());
         $page = Yii::$app->request->get('page',1);
-        $getdata['title'] = Yii::$app->request->get('title','');
-        $getdata['category'] = Yii::$app->request->get('category','');
-        $getdata['issearch'] = Yii::$app->request->get('issearch','');
-        if(isset($getdata['issearch'])&&$getdata['issearch']=='yes'){
-            $page = 1;
-        }
         $article_model = new Article();
-        $article_res = $article_model->getArticles($page,$getdata);
-        $total = $article_model->getCounts($getdata);
-        $category_model = new Category();
-        $category_array = $category_model->getCategoriesByRole(1);
-        $geturl = $_SERVER['QUERY_STRING']!=''?'?'.$_SERVER['QUERY_STRING']:'';
-        if(isset($getdata['issearch'])&&$getdata['issearch']=='yes'){
-            if(strpos($geturl,'issearch')!==false){
-                $geturl = str_replace('&issearch=yes','',$geturl);
-            }
-        }
+        $article_res = $article_model->getArticles($page);
+        $total = $article_model->getCounts();
         if($page!=1&&($page-1)*10>=$total){
             header('location:/article/index/'.ceil($total/10));
             exit;
         }
-        return $this->render('index',array('article_res'=>$article_res,'total'=>$total,'page'=>$page,'geturl'=>$geturl,'category_array'=>$category_array,'isOpen'=>$this->isOpen($this->isLogin())));
+        return $this->render('index',['article_res'=>$article_res,'total'=>$total,'page'=>$page]);
     }
     public function actionList()
     {
@@ -114,9 +98,7 @@ class ArticleController extends BaseController
         $aid = isset($_POST['aid'])&&$_POST['aid']!=''?$_POST['aid']:0;
         $article_model = new Article();
         $detail_array = $article_model->getArticle($aid);
-        $category_model = new Category();
-        $category_array = $category_model->getCategoriesByRole($isnews);
-        $data = $this->renderPartial('newarticle',array('article_detail'=>$detail_array,'category_array'=>$category_array,'isnews'=>$isnews));
+        $data = $this->renderPartial('newarticle',['article_detail'=>$detail_array]);
         $this->renderJson(0, $data, 'OK');
     }
     /**

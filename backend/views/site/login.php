@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8"/>
-    <title>万中-个人网站后台管理系统</title>
+    <title>万中音乐后台管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
@@ -21,7 +21,7 @@
 <body class="login">
 <div class="logo">
     <a href="/">
-        <img src="/images/logo-big.png"  style="width: 250px;" alt=""/>
+        <img src="/images/logo-big.png"  style="width: 100px;" alt=""/>
     </a>
 </div>
 <div class="menu-toggler sidebar-toggler">
@@ -54,12 +54,12 @@
             <br>
         </div>
         <div class="create-account">
-            <p>跳转到网站前台&nbsp; <a href="http://www.gfm.mobi">www.gfm.mobi </a></p>
+            <p>跳转到网站前台&nbsp; <a href="http://wanzhonghuayi.com">wanzhonghuayi.com </a></p>
         </div>
     </form>
 </div>
 <div class="copyright">
-    2017 &copy; GFM后台管理系统v1
+    2017 &copy; 万中音乐后台管理系统v1
 </div>
 
 <!--[if lt IE 9]>

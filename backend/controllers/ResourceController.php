@@ -38,6 +38,7 @@ class ResourceController extends BaseController
         if(!$this->isLogin()){
             $this->renderJson(999, [], '您的账号未登录');
         }
+        print_r($_POST);exit;
         $type = Yii::$app->request->post('type_name','image');
         if(!isset($_FILES['file'])){
             $this->renderJson(999, [], '网络异常');
@@ -47,7 +48,6 @@ class ResourceController extends BaseController
             $file_name = 'file';
         }
         $name = Yii::$app->request->post('name','');
-        $en_name = Yii::$app->request->post('en_name','');
         $desc = Yii::$app->request->post('desc','');
         if(empty($name)){
             if($type=='pdf'){
@@ -62,25 +62,9 @@ class ResourceController extends BaseController
                 $this->renderJson(999, [], '网络异常');
             }
         }
-        if(empty($en_name)){
-            if($type=='pdf'){
-                $this->renderJson(999, [], '英文名称为空');
-            }elseif($type=='image'){
-                if(isset($_FILES['file']['name'])&&!empty($_FILES['file']['name'])){
-                    $en_name = $name;
-                }else{
-                    $this->renderJson(999, [], '网络异常');
-                }
-            }else{
-                $this->renderJson(999, [], '网络异常');
-            }
-        }
         $resource_model = new Resource();
         if($type=='pdf'&&$resource_model->checkName($name)){
             $this->renderJson(999, [], '该中文名称已存在');
-        }
-        if($type=='pdf'&&$resource_model->checkEnName($en_name)){
-            $this->renderJson(999, [], '该英文名称已存在');
         }
         // 资源上传
         $upload_model = new Upload();

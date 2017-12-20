@@ -20,16 +20,6 @@ $this->title = '用户管理';
                     <p class="help-block"></p>
                 </div>
             </div>
-            <div class="form-group" id="email">
-                <label class="col-sm-3 control-label">用户邮箱</label>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="text" name="email" class="form-control" placeholder="请输入用户邮箱"/>
-                    </div>
-                    <p class="help-block"></p>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">角色权限</label>
                 <div class="col-sm-4">
@@ -77,7 +67,6 @@ $this->title = '用户管理';
                         <tr>
                             <th>#</th>
                             <th>用户账号</th>
-                            <th>用户邮箱</th>
                             <th>用户角色</th>
                             <?php if($isOpen!=0){?>
                             <th>操作</th>
@@ -89,7 +78,6 @@ $this->title = '用户管理';
                             <tr>
                                 <td><?=$i++?></td>
                                 <td><?=$v['manager_name']?></td>
-                                <td><?=$v['manager_email']?></td>
                                 <td><?php if($v['role']==1){echo '超级用户';}else{echo '普通用户';}?></td>
                                 <?php if($isOpen!=0){?>
                                 <td>

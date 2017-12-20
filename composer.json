@@ -21,7 +21,8 @@
         "2amigos/yii2-qrcode-helper" : "*",
         "yiisoft/yii2-imagine":"*",
         "moonlandsoft/yii2-phpexcel": "*",
-        "yiisoft/yii2-redis": "~2.0.0"
+        "yiisoft/yii2-redis": "~2.0.0",
+        "qiniu/php-sdk": "^7.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

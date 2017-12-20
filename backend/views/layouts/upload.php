@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">文件上传</h4>
+                <h4 class="modal-title">资源上传</h4>
             </div>
             <div class="modal-body">
                 <form role="form" class="form-horizontal" enctype="multipart/form-data">
@@ -12,8 +12,7 @@
                     <div class="form-group" id="file">
                         <label class="col-md-2 control-label">选择资源<span class="required">*</span></label>
                         <div class="col-md-9">
-                            <input class="form-control" type="file" name="file" accept="application/pdf">
-                            <p style="margin-top: 10px;font-size: 12px; color: #737373;">注：请选择PDF格式文档</p>
+                            <input class="form-control" type="file" name="file" accept="image/*,audio/*,video/*">
                             <p class="help-block"></p>
                         </div>
                     </div>
@@ -24,15 +23,8 @@
                             <p class="help-block"></p>
                         </div>
                     </div>
-                    <div class="form-group" id="en_name">
-                        <label class="col-md-2 control-label">英文名称<span class="required">*</span></label>
-                        <div class="col-md-9">
-                            <input type="text" name="en_name" class="form-control"  maxlength="50"/>
-                            <p class="help-block"></p>
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">资源描述</label>
+                        <label class="col-md-2 control-label">资源描述&nbsp;</label>
                         <div class="col-md-9">
                             <textarea class="form-control" name="desc" maxlength="100" rows="4" style="resize:none;"></textarea>
                         </div>
