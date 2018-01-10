@@ -6,18 +6,75 @@ $this->registerCssFile("@web/css/plugins/portfolio.css");
 $this->registerCssFile("@web/js/plugins/bootstrap-fileinput/bootstrap-fileinput.css");
 $this->registerCssFile("@web/js/plugins/uploader/webuploader.css");
 ?>
-<div class="portlet box blue-hoki" style="margin-bottom: 0px;">
+<div class="row">
+    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue-madison">
+            <div class="visual">
+                <i class="fa fa-file-picture-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                     <?=$count['pic']?>
+                </div>
+                <div class="desc">
+                     图像
+                </div>
+            </div>
+            <a class="more" href="/resource/index/image">
+            View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue-hoki">
+            <div class="visual">
+                <i class="fa fa-file-audio-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                     <?=$count['audio']?>
+                </div>
+                <div class="desc">
+                     音频
+                </div>
+            </div>
+            <a class="more" href="/resource/index/audio">
+            View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat purple-plum">
+            <div class="visual">
+                <i class="fa fa-file-video-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                     <?=$count['video']?>
+                </div>
+                <div class="desc">
+                     视频
+                </div>
+            </div>
+            <a class="more" href="/resource/index/video">
+            View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<?php if($type=='video'){?>
+<div class="portlet box <?php if($type=='video'){echo 'purple-plum';}else{echo 'blue-madison';}?>" style="margin-bottom: 0px;">
     <div class="portlet-title">
-        <div class="caption"><i class="fa fa-file-pdf-o"></i>文档</div>
+        <div class="caption"><i class="fa fa-file-video-o"></i>视频</div>
     </div>
 </div>
 <div class="margin-top-10">
-    <div class="mix-grid clearfix">
-        <?php if(isset($pdf)&&$pdf&&count($pdf)>0){ foreach($pdf as $k=>$v){?>
+    <div class="mix-grid clearfix masonry-container"  id="masonry-container">
+        <?php if(isset($video)&&$video&&count($video)>0){ foreach($video as $k=>$v){?>
         <div class="mix item pdf-item">
             <div class="mix-inner">
                 <div>
-                    <img class="img-responsive" src="/images/pdf.png">
+                    <img class="img-responsive" src="/images/video.png">
                     <p class="pdf-name line-clamp-2"><?=$v['name']?></p>
                 </div>
                 <div class="mix-details">
@@ -30,9 +87,35 @@ $this->registerCssFile("@web/js/plugins/uploader/webuploader.css");
         <?php }}?>
     </div>
 </div>
-<div class="portlet box blue-hoki" style="margin-bottom: 0px;">
+<?php }elseif($type=='audio'){?>
+<div class="portlet box <?php if($type=='audio'){echo 'blue-hoki';}else{echo 'blue-madison';}?>" style="margin-bottom: 0px;">
     <div class="portlet-title">
-        <div class="caption"><i class="fa fa-file-picture-o"></i>图片</div>
+        <div class="caption"><i class="fa fa-file-audio-o"></i>音频</div>
+    </div>
+</div>
+<div class="margin-top-10">
+    <div class="mix-grid clearfix masonry-container"  id="masonry-container">
+        <?php if(isset($audio)&&$audio&&count($audio)>0){ foreach($audio as $k=>$v){?>
+        <div class="mix item pdf-item">
+            <div class="mix-inner">
+                <div>
+                    <img class="img-responsive" src="/images/audio.png">
+                    <p class="pdf-name line-clamp-2"><?=$v['name']?></p>
+                </div>
+                <div class="mix-details">
+                    <div class="mix-desc"><?=$v['description']?></div>
+                    <a class="mix-link remove" data-id="<?=$v['id']?>"><i class="fa fa-remove"></i></a>
+                    <a class="mix-preview" href="<?=$v['path']?>" title=""><i class="fa fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+        <?php }}?>
+    </div>
+</div>
+<?php }else{?>
+<div class="portlet box  <?php if($type=='image'){echo 'blue-madison';}else{echo 'blue-madison';}?>" style="margin-bottom: 0px;">
+    <div class="portlet-title">
+        <div class="caption"><i class="fa fa-file-picture-o"></i>图像</div>
     </div>
 </div>
 <div class="margin-top-10">
@@ -51,7 +134,5 @@ $this->registerCssFile("@web/js/plugins/uploader/webuploader.css");
         <?php }}?>
     </div>
 </div>
-<div>
-
-</div>
+<?php }?>
 

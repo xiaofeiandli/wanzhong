@@ -5,20 +5,18 @@ use Yii;
 use yii\base\Model;
 use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
-use yii\db\ActiveRecord;
-use yii\db\Expression;
 
-class Resource extends Model
+class Article extends Model
 {
     public function getList($type,$page,$limit,$orderby)
     {
         $start = ($page-1)*$limit+1;
-        $sql = "select * from resource where type = '{$type}' and status = 1 order by '{$orderby}' desc limit {$start},{$limit}";
+        $sql = "select * from article where category = '{$type}' and status = 1 order by '{$orderby}' desc limit {$start},{$limit}";
         $res = Yii::$app->db->createCommand($sql)->queryAll();
         if(isset($res[0]['id'])){
             foreach($res as $k=>$v){
                 $res[$k]['created_at'] = date('Y/m/d H:i:s',time());
-                $res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
+                //$res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
             }
         }else{
             $res = false;
@@ -44,12 +42,12 @@ class Resource extends Model
     }
     public function getDetail($id)
     {
-        $sql = "select * from resource where id = {$id}";
+        $sql = "select * from article where id = {$id}";
         $res = Yii::$app->db->createCommand($sql)->queryAll();
         if(isset($res[0]['id'])){
             foreach($res as $k=>$v){
                 $res[$k]['created_at'] = date('Y/m/d H:i:s',time());
-                $res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
+                //$res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
             }
         }else{
             $res = false;
@@ -58,7 +56,7 @@ class Resource extends Model
     }
     public function addReadCount($id)
     {
-        $res = Yii::$app->db->createCommand()->update('resource',['count'=>new Expression('count+1')],['id'=>$id])->execute();
+        $res = Yii::$app->db->createCommand()->update('article',['read'=>new Expression('read+1')],['id'=>$id])->execute();
         if($res&&$res>0){
             $status = true;
         }else{

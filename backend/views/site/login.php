@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8"/>
-    <title>万中音乐后台管理系统</title>
+    <title>万忠华艺后台管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
@@ -19,11 +19,15 @@
     <link href="/css/layout/css/custom.css" rel="stylesheet">
 </head>
 <body class="login">
-<div class="logo">
+<div class="logo"><!-- 
     <a href="/">
         <img src="/images/logo-big.png"  style="width: 100px;" alt=""/>
-    </a>
+    </a> -->
+    <a class="navbar-brand" href="#" style="text-align: center;float:none;font-size: 28px;color: #ccc;">
+            万忠华艺管理后台
+        </a>
 </div>
+
 <div class="menu-toggler sidebar-toggler">
 </div>
 <div class="content">
@@ -59,7 +63,7 @@
     </form>
 </div>
 <div class="copyright">
-    2017 &copy; 万中音乐后台管理系统v1
+    2017 &copy; 万忠华艺后台管理系统v1
 </div>
 
 <!--[if lt IE 9]>

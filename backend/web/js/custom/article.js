@@ -4,7 +4,7 @@ var Article = function(){
 	// 列表 ID
 	var $table = $("#article"),
 		$addNews = $("#new_article"),
-		isNews = $addNews.attr("data-isnews");
+		isNews = 1;
 
 	// 生成文章模态框
 	var articleModal = new Modals({
@@ -23,17 +23,6 @@ var Article = function(){
 		}
 	});
 
-	// 英文缩略图
-	var enthumbFile = new Files({
-		cut: 1,
-		callback: function(ret){
-			var $view = $("#thumb_en");
-			$view.find('.thumb').html('<img height="150" width="200" src="'+ ret +'">');
-			$view.find(".thumb_h").val(ret);
-			enthumbFile.hide();
-		}
-	});
-
 	// 文章验证
 	var articleForm = {
 
@@ -41,31 +30,20 @@ var Article = function(){
 
 
 	function articleAction(thumb){
-		var $thumb = $(thumb),
-			$thumb_en = $(thumb+"_en");
+		var $thumb = $(thumb);
 
 		// 显示缩略图上传框
 		$thumb.find(".thumb-btn").on("click",function(){
 			thumbFile.show();
 		});
-		$thumb_en.find(".thumb-btn").on("click",function(){
-			enthumbFile.show();
-		});
-
 		// 删除缩略图
 		$thumb.find(".del").on("click",function(){
-			$thumb.find(".thumb").html("");
-			$thumb.find(".thumb_h").val("");
-		});
-		$thumb_en.find(".del").on("click",function(){
 			$thumb.find(".thumb").html("");
 			$thumb.find(".thumb_h").val("");
 		});
 
 		// 调用富文本
 		new Summernote("content");
-
-		new Summernote("content_en");
 
 		// 调用时间插件
 		/*articleModal.$content.find(".datetime-picker").datetimepicker({

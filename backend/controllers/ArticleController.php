@@ -20,48 +20,22 @@ class ArticleController extends BaseController
         }
         $view = Yii::$app->view;
         $view->params['item'] = 'article';
+        $type = Yii::$app->request->get('type',1);
         $page = Yii::$app->request->get('page',1);
+        if(!in_array($type, [1,2])){
+            $type = 1;
+        }
+        $view->params['type'] = $type;
         $article_model = new Article();
-        $article_res = $article_model->getArticles($page);
+        $article_res = $article_model->getArticles($type,$page);
         $total = $article_model->getCounts();
+        $count['poem'] = $article_model->getPoemCount();
+        $count['lyric'] = $article_model->getLyricCount();
         if($page!=1&&($page-1)*10>=$total){
-            header('location:/article/index/'.ceil($total/10));
+            header('location:/article/index/'.$type.'/'.ceil($total/10));
             exit;
         }
-        return $this->render('index',['article_res'=>$article_res,'total'=>$total,'page'=>$page]);
-    }
-    public function actionList()
-    {
-        if(!$this->isLogin()){
-            header('location:/');
-            exit;
-        }
-        $view = Yii::$app->view;
-        $view->params['item'] = 'article_list';
-        $view->params['open'] = $this->isOpen($this->isLogin());
-        $page = Yii::$app->request->get('page',1);
-        $getdata['title'] = Yii::$app->request->get('title','');
-        $getdata['category'] = Yii::$app->request->get('category','');
-        $getdata['issearch'] = Yii::$app->request->get('issearch','');
-        if(isset($getdata['issearch'])&&$getdata['issearch']=='yes'){
-            $page = 1;
-        }
-        $article_model = new Article();
-        $article_res = $article_model->getArticles($page,$getdata,2);
-        $total = $article_model->getCounts($getdata,2);
-        $category_model = new Category();
-        $category_array = $category_model->getCategoriesByRole(0);
-        $geturl = $_SERVER['QUERY_STRING']!=''?'?'.$_SERVER['QUERY_STRING']:'';
-        if(isset($getdata['issearch'])&&$getdata['issearch']=='yes'){
-            if(strpos($geturl,'issearch')!==false){
-                $geturl = str_replace('&issearch=yes','',$geturl);
-            }
-        }
-        if($page!=1&&($page-1)*10>=$total){
-            header('location:/article/list/'.ceil($total/10));
-            exit;
-        }
-        return $this->render('list',array('article_res'=>$article_res,'total'=>$total,'page'=>$page,'geturl'=>$geturl,'category_array'=>$category_array,'isOpen'=>$this->isOpen($this->isLogin())));
+        return $this->render('index',['type'=>$type,'count'=>$count,'article_res'=>$article_res,'total'=>$total,'page'=>$page]);
     }
 
     //文章详情
@@ -79,7 +53,7 @@ class ArticleController extends BaseController
         }else{
             $detail_res = [];
         }
-        $data = $this->renderPartial('ajaxdetail', array('detail_array'=>$detail_res,'role'=>$this->isOpen($this->isLogin())));
+        $data = $this->renderPartial('ajaxdetail', ['detail_array'=>$detail_res]);
         $this->renderJson(0, $data, 'OK');
     }
 
@@ -109,93 +83,27 @@ class ArticleController extends BaseController
         if(!$this->isLogin()){
             $this->renderJson(999, [], '您的账号未登录');
         }
-        $flag = Yii::$app->request->post('flag','other');
         $postdata['title'] = Yii::$app->request->post('title','');
-        $postdata['en_title'] = Yii::$app->request->post('en_title','');
-        $postdata['thumb'] = Yii::$app->request->post('thumb','');
-        $postdata['en_thumb'] = Yii::$app->request->post('en_thumb','');
-        $postdata['source'] = Yii::$app->request->post('source','');
-        $postdata['en_source'] = Yii::$app->request->post('en_source','');
+        $postdata['category'] = Yii::$app->request->post('category','');
+        //$postdata['thumb'] = Yii::$app->request->post('thumb','');
         $postdata['author'] = Yii::$app->request->post('author','');
-        $postdata['en_author'] = Yii::$app->request->post('en_author','');
-        $postdata['keywords'] = Yii::$app->request->post('keywords','');
-        $postdata['en_keywords'] = Yii::$app->request->post('en_keywords','');
-        $postdata['description'] = Yii::$app->request->post('description','');
-        $postdata['en_description'] = Yii::$app->request->post('en_description','');
         $postdata['content'] = Yii::$app->request->post('content','');
-        $postdata['en_content'] = Yii::$app->request->post('en_content','');
-        $postdata['weight'] = Yii::$app->request->post('weight',0)==''?0:Yii::$app->request->post('weight',0);
-        $managers_model = new Manager();
-        $created_by = $managers_model->getManagerName($this->isLogin());
-        $postdata['created_by'] = $created_by['name'];
-        $postdata['updated_by'] = $postdata['created_by'];
-        $postdata['is_news'] = Yii::$app->request->post('isnews',0);
-        $category_id=array();
-        $category_model = new Category();
-        foreach($_POST as $pk=>$pv){
-            if(strpos($pk,'category_')!==false){
-                $category_id[] = $pv;
-                $catedetail = $category_model->getCate($pv);
-                if($catedetail&&$catedetail['flag']=='news'){
-                    $flag='news';
-                }
-            }
-        }
-        if(count($category_id)>0){
-            if($postdata['is_news']==0&&count($category_id)>1){
-                $this->renderJson(999,[],'模版文章分类需单选');
-            }
-            $postdata['category_id'] = implode(',',$category_id);
-        }else{
-            $postdata['category_id'] = '';
-        }
-        if($postdata['category_id']==''){
+        $postdata['created_at'] = time();
+        if($postdata['category']==''){
             $this->renderJson(999,[],'文章分类不能为空');
         }
-        if($postdata['thumb']!=''){
-            if(strstr($postdata['thumb'],Yii::$app->params['img_domain'])!==false){
-                $postdata['thumb'] = str_replace(Yii::$app->params['img_domain'],'',$postdata['thumb']);
-            }else{
-                $this->renderJson(999,[],'文章图地址错误');
-            }
+        if($postdata['title']==''){
+            $this->renderJson(999,[],'文章标题不能为空');
         }
-        if($postdata['en_thumb']!=''){
-            if(strstr($postdata['en_thumb'],Yii::$app->params['img_domain'])!==false){
-                $postdata['en_thumb'] = str_replace(Yii::$app->params['img_domain'],'',$postdata['en_thumb']);
-            }else{
-                $this->renderJson(999,[],'文章图地址错误');
-            }
-        }
-        if($flag=='news'){
-            if($postdata['title']==''){
-                $this->renderJson(999,[],'文章标题不能为空');
-            }
-            if($postdata['en_title']==''){
-                $this->renderJson(999,[],'文章标题不能为空');
-            }
-            if($postdata['description']==''){
-                $this->renderJson(999,[],'文章描述不能为空');
-            }
-            if($postdata['en_description']==''){
-                $this->renderJson(999,[],'文章英文描述不能为空');
-            }
-            if($postdata['content']==''||$postdata['content']=='<p><br></p>'){
-                $this->renderJson(999,[],'文章内容不能为空');
-            }else{
-                //$postdata['content'] = htmlspecialchars($postdata['content'],ENT_QUOTES); //转义
-            }
-            if($postdata['en_content']==''||$postdata['en_content']=='<p><br></p>'){
-                $this->renderJson(999,[],'英文版文章内容不能为空');
-            }else{
-                //$postdata['en_content'] = htmlspecialchars($postdata['en_content'],ENT_QUOTES); //转义
-            }
+        if($postdata['content']==''||$postdata['content']=='<p><br></p>'){
+            $this->renderJson(999,[],'文章内容不能为空');
         }
         $article_model = new Article();
         $add_res = $article_model->addArticle($postdata);
         if($add_res){
             $this->renderJson(0,[],'OK');
         }else{
-            $this->renderJson(500,[],'Server Error');
+            $this->renderJson(500,[],'网络异常');
         }
     }
 
@@ -207,97 +115,34 @@ class ArticleController extends BaseController
         if(!$this->isLogin()){
             $this->renderJson(999, [], '您的账号未登录');
         }
-        $flag = Yii::$app->request->post('flag','other');
         $postdata['aid'] = Yii::$app->request->post('aid','');
         $postdata['title'] = Yii::$app->request->post('title','');
-        $postdata['en_title'] = Yii::$app->request->post('en_title','');
-        $postdata['thumb'] = Yii::$app->request->post('thumb','');
-        $postdata['en_thumb'] = Yii::$app->request->post('en_thumb','');
-        $postdata['source'] = Yii::$app->request->post('source','');
-        $postdata['en_source'] = Yii::$app->request->post('en_source','');
+        $postdata['category'] = Yii::$app->request->post('category','');
+        //$postdata['thumb'] = Yii::$app->request->post('thumb','');
         $postdata['author'] = Yii::$app->request->post('author','');
-        $postdata['en_author'] = Yii::$app->request->post('en_author','');
-        $postdata['keywords'] = Yii::$app->request->post('keywords','');
-        $postdata['en_keywords'] = Yii::$app->request->post('en_keywords','');
-        $postdata['description'] = Yii::$app->request->post('description','');
-        $postdata['en_description'] = Yii::$app->request->post('en_description','');
         $postdata['content'] = Yii::$app->request->post('content','');
-        $postdata['en_content'] = Yii::$app->request->post('en_content','');
-        $postdata['is_news'] = Yii::$app->request->post('isnews',0);
-        $postdata['weight'] = Yii::$app->request->post('weight',0);
-        $managers_model = new Manager();
-        $updated_by = $managers_model->getManagerName($this->isLogin());
-        $postdata['updated_by'] = $updated_by['name'];
-        $category_id=array();
-        $category_model = new Category();
-        foreach($_POST as $pk=>$pv){
-            if(strpos($pk,'category_')!==false){
-                $category_id[] = $pv;
-                $catedetail = $category_model->getCate($pv);
-                if($catedetail&&$catedetail['flag']=='news'){
-                    $flag='news';
-                }
-            }
-        }
-        if(count($category_id)>0){
-            if($postdata['is_news']==0&&count($category_id)>1){
-                $this->renderJson(999,[],'模版文章分类需单选');
-            }
-            $postdata['category_id'] = implode(',',$category_id);
-        }
-        if($postdata['category_id']==''){
+        if($postdata['category']==''){
             $this->renderJson(999,[],'分类不能为空');
         }
-        if($flag=='news'){
-            if($postdata['title']==''){
-                $this->renderJson(999,[],'文章标题不能为空');
-            }
-            if($postdata['en_title']==''){
-                $this->renderJson(999,[],'文章标题不能为空');
-            }
-            if($postdata['description']==''){
-                $this->renderJson(999,[],'文章描述不能为空');
-            }
-            if($postdata['en_description']==''){
-                $this->renderJson(999,[],'文章英文描述不能为空');
-            }
-            if($postdata['content']==''||$postdata['content']=='<p><br></p>'){
-                $this->renderJson(999,[],'文章内容不能为空');
-            }else{
-                //$postdata['content'] = htmlspecialchars($postdata['content'],ENT_QUOTES); //转义
-            }
-            if($postdata['en_content']==''||$postdata['en_content']=='<p><br></p>'){
-                $this->renderJson(999,[],'英文版文章内容不能为空');
-            }else{
-                //$postdata['en_content'] = htmlspecialchars($postdata['en_content'],ENT_QUOTES); //转义
-            }
+        if($postdata['title']==''){
+            $this->renderJson(999,[],'文章标题不能为空');
         }
-        if($postdata['thumb']!=''){
+        if($postdata['content']==''||$postdata['content']=='<p><br></p>'){
+            $this->renderJson(999,[],'文章内容不能为空');
+        }
+        /*if($postdata['thumb']!=''){
             if(strstr($postdata['thumb'],Yii::$app->params['img_domain'])!==false){
                 $postdata['thumb'] = str_replace(Yii::$app->params['img_domain'],'',$postdata['thumb']);
             }else{
                 $this->renderJson(999,[],'文章图地址错误');
             }
-        }
-        if($postdata['en_thumb']!=''){
-            if(strstr($postdata['en_thumb'],Yii::$app->params['img_domain'])!==false){
-                $postdata['en_thumb'] = str_replace(Yii::$app->params['img_domain'],'',$postdata['en_thumb']);
-            }else{
-                $this->renderJson(999,[],'文章图地址错误');
-            }
-        }
-        if($postdata['content']!=''){
-            //$postdata['content'] = htmlspecialchars($postdata['content'],ENT_QUOTES); //转义
-        }
-        /*if($postdata['en_content']!=''){
-            $postdata['en_content'] = htmlspecialchars($postdata['en_content'],ENT_QUOTES); //转义
         }*/
         $article_model = new Article();
         $edit_res = $article_model->editArticle($postdata);
         if($edit_res){
             $this->renderJson(0,[],'OK');
         }else{
-            $this->renderJson(500,[],'Server Error');
+            $this->renderJson(500,[],'网络异常');
         }
     }
     

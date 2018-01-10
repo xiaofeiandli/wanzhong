@@ -6,10 +6,10 @@ use backend\models\Base;
 
 class Article extends Base
 {
-    public function getArticles($page)
+    public function getArticles($type,$page)
     {
         $start = ($page-1)*10;
-        $article_sql = "select * from article order by created_at desc limit {$start},10";
+        $article_sql = "select * from article where category = {$type} order by created_at desc limit {$start},10";
         $connection = Yii::$app->db;
         $command = $connection->createCommand($article_sql);
         $article_res = $command->queryAll();
@@ -21,6 +21,33 @@ class Article extends Base
             $article_res = array();
         }
         return $article_res;
+    }
+
+    /**
+     * 获取文章中的诗数量
+     */
+    public function getPoemCount()
+    {
+        $res = Yii::$app->db->createCommand("select count(*) as count from `article` where category = 2")->queryAll();
+        if(isset($res[0]['count'])){
+            $result = $res[0]['count'];
+        }else{
+            $result = 0;
+        }
+        return $result;
+    }
+    /**
+     * 获取文章中的歌词数量
+     */
+    public function getLyricCount()
+    {
+        $res = Yii::$app->db->createCommand("select count(*) as count from `article` where category = 1")->queryAll();
+        if(isset($res[0]['count'])){
+            $result = $res[0]['count'];
+        }else{
+            $result = 0;
+        }
+        return $result;
     }
 
     public function getCounts()
@@ -88,7 +115,6 @@ class Article extends Base
     {
         $nowtime = time();
         $postdata['created_at'] = $nowtime;
-        $postdata['updated_at'] = $nowtime;
         $insert_res = Yii::$app->db->createCommand()->insert('article',$postdata)->execute();
         if($insert_res>0){
             $return_res = true;
@@ -100,16 +126,16 @@ class Article extends Base
     //编辑文章
     public function editArticle($postdata)
     {
+
         $aid = $postdata['aid'];
         unset($postdata['aid']);
-        $postdata['updated_at'] = time();
         /*foreach($postdata as $k=>$v){
             if(empty($v)){
                 unset($postdata[$k]);
             }
         }*/
         $update_res = Yii::$app->db->createCommand()->update('article',$postdata,'id=:aid',array(':aid'=>$aid))->execute();
-        if($update_res>0){
+        if(is_numeric($update_res)){
             $ret = true;
         }else{
             $ret = false;

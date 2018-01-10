@@ -11,12 +11,12 @@
                 if(isset($detail_array)&&count($detail_array)>0){
                 ?>
                         <tr><th> 标题 </th><td> <?=$detail_array['title'] ?> </td></tr>
-                        <tr><th> 缩略图 </th>
+                        <!-- <tr><th> 缩略图 </th>
                             <td>
                                 <?php if(isset($detail_array['thumb'])&&$detail_array['thumb']!=''){?>
                                 <img height="150" width="200" src="<?=$detail_array['thumb']?>">
                                 <?php } ?>
-                            </td></tr>
+                            </td></tr> -->
                         <tr><th> 作者 </th><td> <?=$detail_array['author'] ?> </td></tr>
                         <tr><th> 状态 </th><td><?php if($detail_array['status']==0){?> 未发布<?php }else{?> 已发布 <?php } ?> </td></tr>
                         <tr><th> 发布时间 </th><td> <?=$detail_array['created_at'] ?> </td></tr>

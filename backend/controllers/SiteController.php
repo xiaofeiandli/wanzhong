@@ -4,6 +4,8 @@ namespace backend\controllers;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\models\Resource;
+use backend\models\Article;
 
 /**
  * Site controller
@@ -63,8 +65,14 @@ class SiteController extends BaseController
         }
         $view = Yii::$app->view;
         $view->params['item'] = 'index';
-        $view->params['open'] = $this->isOpen($this->isLogin());
-        return $this->render('index',['isOpen'=>$this->isOpen($this->isLogin())]);
+        $article_model = new Article();
+        $resource_model = new Resource();
+        $count['video'] = $resource_model->getVideoCount();
+        $count['audio'] = $resource_model->getAudioCount();
+        $count['pic'] = $resource_model->getPicCount();
+        $count['poem'] = $article_model->getPoemCount();
+        $count['lyric'] = $article_model->getLyricCount();
+        return $this->render('index',['count'=>$count]);
     }
 
     /**

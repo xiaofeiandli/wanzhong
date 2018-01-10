@@ -1,8 +1,8 @@
 <?php
 use yii\web\View;
-$this->title = '修改密码';
+$this->title = '登录管理';
 ?>
-<div class="portlet box blue-hoki" style="width: 450px; margin: 0 auto;">
+<div class="portlet box blue-hoki" style="width: 100%; margin: 0 auto;">
     <div class="portlet-title">
         <div class="caption"><i class="glyphicon glyphicon-cog"></i> 修改密码
         </div>

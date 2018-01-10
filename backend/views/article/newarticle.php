@@ -20,20 +20,23 @@
 			?>
 					<div class="form-body">
 						<div class="form-group">
-							<label class="col-md-2 control-label">文章分类<i class="required">*</i></label>
-							<div class="col-md-8">
-								<div class="form-group">
-									<div class="input-group">
-										<div class="icheck-inline margin-left-60" id="checkform">
-													<label>
-														<input type="checkbox" name="category_1" value="1"   class="child-checkbox"> 诗
-														<input type="checkbox" name="category_2" value="2"   class="child-checkbox"> 歌词
-													</label>
-										</div>
-									</div>
-								</div>
+	                        <label class="col-sm-2 control-label">分类</label>
+	                        <div class="col-sm-8">
+	                            <div class="input-group">
+	                                <div class="icheck-inline">
+	                                    <div class="md-radio-inline">
+	                                        <div class="md-radio">
+	                                            <input class="icheck" type="radio" value='2' name="category" class="md-radiobtn" <?php if($article_detail['category']==2){echo 'checked';}?>>诗
+	                                            <!-- <label for="1"><span></span><span class="check"></span><span class="box"></span>诗</label> -->
+	                                        </div>
+	                                        <div class="md-radio">
+	                                            <input class="icheck" type="radio" value='1' name="category" class="md-radiobtn"  <?php if($article_detail['category']==1){echo 'checked';}?>>歌词
+	                                            <!-- <label for="2"><span></span><span class="check"></span><span class="box"></span>歌词</label> -->
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
 							</div>
-							
 						</div>
 						<div class="form-group" id="title">
 							<label class="col-md-2 control-label">标题<i class="required">*</i></label>
@@ -42,7 +45,7 @@
 								<div class="help-block"></div>
 							</div>
 						</div>
-						<div class="form-group" id="thumb">
+						<!-- <div class="form-group" id="thumb">
 							<label class="col-md-2 control-label">缩略图</label>
 							<div class="col-md-8">
 								<div class="margin-top-10 thumb">
@@ -56,7 +59,7 @@
 								<span class="btn blue thumb-btn" style="margin-left:0;">上传</span>
 								<span class="btn red del">删除</span>
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group" id="author">
 							<label class="col-md-2 control-label">作者</label>
 							<div class="col-md-8">
@@ -76,7 +79,7 @@
 				}else{
 			?>
 					<div class="form-body">
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label class="col-md-2 control-label">文章分类<i class="required">*</i></label>
 							<div class="col-md-8">
 								<div class="form-group">
@@ -88,7 +91,27 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
+
+	                    <div class="form-group">
+	                        <label class="col-sm-2 control-label">分类</label>
+	                        <div class="col-sm-9">
+	                            <div class="input-group">
+	                                <div class="icheck-inline">
+	                                    <div class="md-radio-inline">
+	                                        <div class="md-radio">
+	                                            <input class="icheck" type="radio" value='2' name="category" class="md-radiobtn" checked>诗
+	                                            <!-- <label for="1"><span></span><span class="check"></span><span class="box"></span>诗</label> -->
+	                                        </div>
+	                                        <div class="md-radio">
+	                                            <input class="icheck" type="radio" value='1' name="category" class="md-radiobtn">歌词
+	                                            <!-- <label for="2"><span></span><span class="check"></span><span class="box"></span>歌词</label> -->
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
 						<div class="form-group" id="title">
 							<label class="col-md-2 control-label">标题<i class="required">*</i></label>
 							<div class="col-md-8">
@@ -96,7 +119,7 @@
 								<div class="help-block"></div>
 							</div>
 						</div>
-						<div class="form-group" id="thumb">
+						<!-- <div class="form-group" id="thumb">
 							<label class="col-md-2 control-label">缩略图</label>
 							<div class="col-md-8">
 								<div class="margin-top-10 thumb"></div>
@@ -104,7 +127,7 @@
 								<span class="btn blue thumb-btn" style="margin-left:0;">上传</span>
 								<span class="btn red del">删除</span>
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group" id="author">
 							<label class="col-md-2 control-label">作者</label>
 							<div class="col-md-8">

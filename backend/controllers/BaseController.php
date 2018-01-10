@@ -30,8 +30,8 @@ class BaseController extends Controller
     public function isLogin()
     {
         $cookies = Yii::$app->request->cookies;
-        if($cookies && $cookies->has('gfm')){
-            $encrypted_token = $cookies->get('gfm');
+        if($cookies && $cookies->has('wanzhong')){
+            $encrypted_token = $cookies->get('wanzhong');
         }else{
             $encrypted_token = Yii::$app->request->get('token');
         }
@@ -84,15 +84,6 @@ class BaseController extends Controller
         $token = array('uid' => $uid, 'timestamp' => $now, 'expiretime' => $now + 60*60*8);
         $data = $m->encode(json_encode($token));
         return $data;
-    }
-    /**
-     * 查看用户权限
-     */
-    public function isOpen($mid)
-    {
-        $manager_model = new Manager();
-        $res = $manager_model->getRole($mid);
-        return $res;
     }
     /**
      * 压缩图片

@@ -17,7 +17,78 @@ class Resource extends Base
         }else{
             foreach($res as $k=>$v){
                 $res[$k]['path'] = Yii::$app->params['img_domain'] . $v['path'];
-                $res[$k]['thumb'] = Yii::$app->params['img_domain'] . $v['thumb'];
+                $res[$k]['thumb'] = Yii::$app->params['img_domain'] . $v['path'];
+            }
+        }
+        return $res;
+    }
+    /**
+     * 获取资源库中的图片数量
+     */
+    public function getPicCount()
+    {
+        $res = Yii::$app->db->createCommand("select count(*) as count from resource where type = 'image'")->queryAll();
+        if(isset($res[0]['count'])){
+            $result = $res[0]['count'];
+        }else{
+            $result = 0;
+        }
+        return $result;
+    }
+    /**
+     * 获取资源库中的视频数量
+     */
+    public function getVideoCount()
+    {
+        $res = Yii::$app->db->createCommand("select count(*) as count from resource where type = 'video'")->queryAll();
+        if(isset($res[0]['count'])){
+            $result = $res[0]['count'];
+        }else{
+            $result = 0;
+        }
+        return $result;
+    }
+    /**
+     * 获取资源库中的音频数量
+     */
+    public function getAudioCount()
+    {
+        $res = Yii::$app->db->createCommand("select count(*) as count from resource where type = 'audio'")->queryAll();
+        if(isset($res[0]['count'])){
+            $result = $res[0]['count'];
+        }else{
+            $result = 0;
+        }
+        return $result;
+    }
+    /**
+     * 获取资源库中的视频
+     */
+    public function getVideo()
+    {
+        $res = Yii::$app->db->createCommand("select * from resource where type = 'video' order by created_at desc")->queryAll();
+        if(count($res)==0){
+            $res = false;
+        }else{
+            foreach($res as $k=>$v){
+                $res[$k]['path'] = Yii::$app->params['img_domain'] . $v['path'];
+                $res[$k]['thumb'] = Yii::$app->params['img_domain'] . $v['path'];
+            }
+        }
+        return $res;
+    }
+    /**
+     * 获取资源库中的音频
+     */
+    public function getAudio()
+    {
+        $res = Yii::$app->db->createCommand("select * from resource where type = 'audio' order by created_at desc")->queryAll();
+        if(count($res)==0){
+            $res = false;
+        }else{
+            foreach($res as $k=>$v){
+                $res[$k]['path'] = Yii::$app->params['img_domain'] . $v['path'];
+                $res[$k]['thumb'] = Yii::$app->params['img_domain'] . $v['path'];
             }
         }
         return $res;
@@ -85,9 +156,9 @@ class Resource extends Base
     /**
      * 资源储存
      */
-    public function savePic($path,$type,$name,$en_name,$thumb,$desc,$manager_id)
+    public function savePic($path,$type,$name,$desc)
     {
-        $insert_res = Yii::$app->db->createCommand()->insert('resource',array('path'=>$path,'type'=>$type,'name'=>$name,'en_name'=>$en_name,'thumb'=>$thumb,'description'=>$desc,'manager_id'=>$manager_id,'created_at'=>time(),'updated_at'=>time()))->execute();
+        $insert_res = Yii::$app->db->createCommand()->insert('resource',array('path'=>$path,'type'=>$type,'name'=>$name,'created_at'=>time()))->execute();
         if($insert_res==1){
             $status = true;
         }else{

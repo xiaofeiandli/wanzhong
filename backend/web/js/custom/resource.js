@@ -10,7 +10,7 @@ var Resource = function(){
 		// 等待图片加载完
 		$container.imagesLoaded( function () {
 			$container.masonry({
-				itemSelector: '.image-item'
+				itemSelector: '.item'
 			});
 		});
 
@@ -27,8 +27,9 @@ var Resource = function(){
 					data: "id="+id,
 					loading: "base",
 					success: function(){
-						$container.masonry( 'remove', $(_this).closest(".item").get(0))
-							.masonry('layout');
+						location.reload();
+						/*$container.masonry( 'remove', $(_this).closest(".item").get(0))
+							.masonry('layout');*/
 
 					},
 					fail: function(ret){
@@ -52,9 +53,6 @@ var Resource = function(){
 			},
 			name: function(){
 				return Verify.empty("#name","input");
-			},
-			en_name: function(){
-				return Verify.empty("#en_name","input");
 			}
 		};
 

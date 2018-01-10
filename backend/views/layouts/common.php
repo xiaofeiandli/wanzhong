@@ -8,7 +8,7 @@ AppAsset::register($this);
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8"/>
-    <title><?= Html::encode($this->title) ?>_能见管理后台</title>
+    <title><?= Html::encode($this->title) ?>_万忠华艺管理后台</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="page-header navbar navbar-fixed-top">
     <div class="page-header-inner">
         <a class="navbar-brand" href="/" style="margin-left: 10px;font-size: 18px;color: #ccc;">
-            能见管理后台
+            万忠华艺管理后台
         </a>
         <!-- <div class="page-logo">
             <a href="/">
@@ -47,11 +47,11 @@ AppAsset::register($this);
                     </span>
                     <i class="fa fa-angle-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-default" style="min-width:125px;width: 125px;">
-                        <li>
+                    <ul class="dropdown-menu dropdown-menu-default" style="min-width:125px;width: 135px;">
+                        <!-- <li>
                             <a href="/manager/resetpwd">
                             <i class="glyphicon glyphicon-wrench"></i>修改密码</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="javascript:;" id="logout">
                             <i class="glyphicon glyphicon-log-out"></i>退出登录</a>
@@ -79,7 +79,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li <?php if(isset($this->params['item'])&&$this->params['item']=='article'){echo "class='active'";}?>>
-                    <a href="/article/index/1">
+                    <a href="/article/index/1/1">
                         <i class="glyphicon glyphicon-pencil"></i>
                         <span class="title">文章管理</span>
                         <?php if(isset($this->params['item'])&&$this->params['item']=='article'){?>
@@ -88,7 +88,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li <?php if(isset($this->params['item'])&&$this->params['item']=='resource'){echo "class='active'";}?>>
-                    <a href="/resource/index">
+                    <a href="/resource/index/image">
                         <i class="glyphicon glyphicon-download-alt"></i>
                         <span class="title">资源管理</span>
                         <?php if(isset($this->params['item'])&&$this->params['item']=='resource'){?>
@@ -97,9 +97,9 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li <?php if(isset($this->params['item'])&&$this->params['item']=='manager'){echo "class='active'";}?>>
-                    <a href="/manager/index">
+                    <a href="/manager/resetpwd">
                         <i class="glyphicon glyphicon-user"></i>
-                        <span class="title">用户管理</span>
+                        <span class="title">登录管理</span>
                         <?php if(isset($this->params['item'])&&$this->params['item']=='manager'){?>
                             <span class="selected"></span>
                         <?php }?>
@@ -114,8 +114,13 @@ AppAsset::register($this);
                 <div class="page-bar">
                     <?php if(isset($this->params['item'])&&$this->params['item']=='resource'){?>
                     <div class="pull-right">
-                        <span class="btn blue" id="images"><i class="fa fa-picture-o"></i> 图片上传</span>
-                        <a class="btn blue" data-toggle="modal" href="#pdf_modal"><i class="fa fa-upload"></i> 资源上传</a>
+                        <span class="btn blue" id="images"><i class="fa fa-picture-o"></i> 图像上传</span>
+                        <a class="btn blue" data-toggle="modal" href="#pdf_modal"><i class="fa fa-upload"></i> 音视频上传</a>
+                    </div>
+                    <?php }?>
+                    <?php if(isset($this->params['item'])&&$this->params['item']=='article'){?>
+                    <div class="pull-right">
+                        <span class="btn blue" id="new_article"><i class="fa fa-file-word-o"></i> 添加文章</span>
                     </div>
                     <?php }?>
                     <ul class="page-breadcrumb">
@@ -130,7 +135,7 @@ AppAsset::register($this);
 </div>
 <div class="page-footer">
     <div class="page-footer-inner">
-        Copyright &copy; 万中音乐
+        Copyright &copy; 万忠华艺
     </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>

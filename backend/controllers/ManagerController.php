@@ -31,7 +31,7 @@ class ManagerController extends BaseController
         }
         $token = $this->makeToken($manager['id']);
         //生成cookie
-        $cookies = Yii::$app->response->cookies->add(new Cookie(['name' => 'gfm', 'value' => $token, 'domain' => $_SERVER['HTTP_HOST'],'expire' => 0]));
+        $cookies = Yii::$app->response->cookies->add(new Cookie(['name' => 'wanzhong', 'value' => $token, 'domain' => $_SERVER['HTTP_HOST'],'expire' => 0]));
         $this->renderJson(0, ['uid' => $manager['id'], 'token' => $token]);
     }
     /**
@@ -51,92 +51,8 @@ class ManagerController extends BaseController
      */
     public function actionSignout()
     {
-        setcookie("gfm","",time()-1,'/',$_SERVER['HTTP_HOST']);
+        setcookie("wanzhong","",time()-1,'/',$_SERVER['HTTP_HOST']);
         $this->renderJson(0,[],'OK');
-    }
-    /**
-     * 管理员首页
-     */
-    public function actionIndex()
-    {
-        if(!$this->isLogin()){
-            header('location:/site/login');
-            exit;
-        }
-        $view = Yii::$app->view;
-        $view->params['item'] = 'manager';
-        $view->params['open'] = $this->isOpen($this->isLogin());
-        $manager_model = new Manager();
-        $res = $manager_model->getAccounts();
-        return $this->render('index',['list'=>$res,'isOpen'=>$this->isOpen($this->isLogin())]);
-    }
-
-    /**
-     * 添加管理员
-     */
-    public function actionAdd()
-    {
-        if(!$this->isLogin()){
-            $this->renderJson(999, [], '您的账号未登录');
-        }
-        $username = Yii::$app->request->post('username','');
-        $email = Yii::$app->request->post('email','');
-        $auth = Yii::$app->request->post('auth',0);
-        $manager_model = new Manager();
-        if(empty($username)){
-            $this->renderJson(999,[],'账号不能为空');
-        }else{
-            $manager = $manager_model->findAccountByName($username);
-            if(isset($manager['id'])){
-                $this->renderJson(999,[],'该账号已存在');
-            }
-        }
-        if(in_array($username,['admin','root','administrator','supervisor'])){
-            $this->renderJson(999,[],'账号名称不能为'.$username);
-        }
-        if(empty($email)){
-            $this->renderJson(999,[],'邮箱不能为空');
-        }
-        $auth = $auth == 0 ? 0 :1;
-        $randdata = rand(1,100);
-        $send_pwd = substr(md5($randdata) , 0 , 8);
-        $password = md5($send_pwd);
-        $res = $manager_model->addManager($username,$password,$email,$auth);
-        if($res){
-            $mailer_model = new Mailer();
-            $mailer_msg = '您在GFM(未来出行)后台的管理员账号‘'.$username.'’已生效，密码为‘'.$send_pwd.'’，首次登录请修改密码。';
-            $mailer_res = $mailer_model->sendEmail($email,$mailer_msg);
-            if($mailer_res){
-                $msg = '新建管理员‘'.$username.'’在GFM(未来出行)后台管理系统的密码为‘'.$send_pwd.'’，密码已通过邮件发送到该管理员邮箱。';
-            }else{
-                $msg = '新建管理员‘'.$username.'’在GFM(未来出行)后台管理系统的密码为‘'.$send_pwd.'’,请告知其密码。';
-            }
-            $this->renderJson(0,[],$msg);
-        }else{
-            $this->renderJson(999,[],'网络错误');
-        }
-    }
-    /**
-     * 删除管理员
-     */
-    public function actionDel()
-    {
-        if(!$this->isLogin()){
-            $this->renderJson(999,[],'您的账号未登录');
-        }
-        $id = Yii::$app->request->post('id');
-        if(!isset($id)){
-            $this->renderJson(999,[],'网络异常');
-        }
-        $manager_model = new Manager();
-        if($id==$this->isLogin()){
-            $this->renderJson(999,[],'您不能删除自己的账号');
-        }
-        $delete_res = $manager_model->delManager($id);
-        if(!$delete_res){
-            $this->renderJson(999,[],'删除失败');
-        }
-        $this->renderJson(0,[],'删除成功');
     }
     // 修改密码模版
     public function actionResetpwd()
@@ -147,8 +63,7 @@ class ManagerController extends BaseController
         }
         $view = Yii::$app->view;
         $view->params['item'] = 'manager';
-        $view->params['open'] = $this->isOpen($this->isLogin());
-        return $this->render('resetpwd',['id'=>$this->isLogin(),'isOpen'=>$this->isOpen($this->isLogin())]);
+        return $this->render('resetpwd',['id'=>$this->isLogin()]);
     }
     // 重置密码
     public function actionNewpwd()
@@ -173,7 +88,7 @@ class ManagerController extends BaseController
         $manager_model = new Manager();
         $change_res = $manager_model->changePwd($_POST,$mid);
         if($change_res['status']){
-            setcookie("gfm","",time()-1,'/',$_SERVER['HTTP_HOST']);
+            setcookie("wanzhong","",time()-1,'/',$_SERVER['HTTP_HOST']);
             $this->renderJson(0,[],'修改成功');
         }else{
             $this->renderJson(999,[],$change_res['msg']);

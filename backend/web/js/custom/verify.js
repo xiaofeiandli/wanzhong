@@ -209,7 +209,7 @@ var Action = function(){
 
 				if(params.edit){ // 若有富文本编辑器
 					obj[params.edit] = $(".summernote","#"+params.edit).summernote("code");
-					obj["en_"+params.edit] = $(".summernote","#"+params.edit+ "_en").summernote("code");
+					//obj["en_"+params.edit] = $(".summernote","#"+params.edit+ "_en").summernote("code");
 				}
 
 				params.data = obj;

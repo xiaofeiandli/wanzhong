@@ -7,13 +7,51 @@ $this->registerCssFile("@web/js/plugins/icheck/skins/all.css");
 $this->registerCssFile("@web/js/plugins/ladda/ladda-themeless.min.css");
 ?>
 <div class="row">
+    <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue-madison">
+            <div class="visual">
+                <i class="fa fa-wordpress"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                     <?=$count['lyric']?>
+                </div>
+                <div class="desc">
+                     歌词
+                </div>
+            </div>
+            <a class="more" href="/article/index/1/1">
+            View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue-hoki">
+            <div class="visual">
+                <i class="fa fa-file-word-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                     <?=$count['poem']?>
+                </div>
+                <div class="desc">
+                     诗
+                </div>
+            </div>
+            <a class="more" href="/article/index/2/1">
+            View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-12">
-        <div class="portlet box blue-hoki">
+        <div class="portlet box <?php if($type==1){echo 'blue-madison';}elseif($type==2){echo 'blue-hoki';}else{echo 'blue-hoki';}?>">
             <div class="portlet-title" style="padding-right:0;">
                 <div class="caption">
-                    <i class="icon-layers"></i>文章管理
+                    <i class="icon-layers"></i><?php if($type==1){echo '歌词管理';}elseif($type==2){echo '诗管理';}else{echo '文章管理';}?>
                 </div>
-                <span class="btn blue pull-right" style="padding: 10px 14px;" id="new_article"><i class="fa fa-plus"></i> 添加文章</span>
+                <!-- <span class="btn blue pull-right" style="padding: 10px 14px;" id="new_article"><i class="fa fa-plus"></i> 添加文章</span> -->
             </div>
             <div class="portlet-body">
                 <?php if(isset($article_res)&&count($article_res)>0){ ?>
