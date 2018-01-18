@@ -53,7 +53,7 @@ $actionID = Yii::$app->controller->action->id;
 	<div class="footer">
 		<div class="container">
 			<div style="margin-bottom: 52px;"><span class="footer-margin">copyright © 2003-2018 68design.net.all rights reserved</span><span>站长统计</span>️</div>
-			<div><span class="footer-margin">皖icp备05012247号</span><span>皖公网备案34010402700146号</span></div>
+			<div><span class="footer-margin">京ICP备18002956号</span><span>皖公网备案34010402700146号</span></div>
 		</div>
 	</div>
 </html>
