@@ -1,6 +1,6 @@
 <?php
 use yii\web\View;
-$this->title = '登录管理';
+$this->title = '后台管理';
 ?>
 <div class="portlet box blue-hoki" style="width: 100%; margin: 0 auto;">
     <div class="portlet-title">

@@ -99,7 +99,7 @@ AppAsset::register($this);
                 <li <?php if(isset($this->params['item'])&&$this->params['item']=='manager'){echo "class='active'";}?>>
                     <a href="/manager/resetpwd">
                         <i class="glyphicon glyphicon-user"></i>
-                        <span class="title">登录管理</span>
+                        <span class="title">后台管理</span>
                         <?php if(isset($this->params['item'])&&$this->params['item']=='manager'){?>
                             <span class="selected"></span>
                         <?php }?>
