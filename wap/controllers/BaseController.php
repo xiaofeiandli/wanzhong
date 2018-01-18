@@ -20,43 +20,9 @@ class BaseController extends Controller
     {
         parent::init();
         $view = Yii::$app->view;
-        //国际化（中英文切换）
-        if(isset($_SERVER['REQUEST_URI'])&&strpos($_SERVER['REQUEST_URI'], '/en')!==false){
-            $this->language = 'en';
-            $view->params['language'] = 'en';
-            \Yii::$app->language = 'zh-CN';
-        }else{
-            $view->params['language'] = '';
-        }
-        //php判断客户端是否为手机
-        $agent = $_SERVER['HTTP_USER_AGENT'];  
         if(!(strpos($agent,"NetFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS"))){
             header("Location:".Yii::$app->params['domain']);
         }
-        //传递中英文切换的当前地址
-        $cur_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-        //print_r($cur_url);exit;
-        if(strpos($cur_url,Yii::$app->params['top_domain'])!==false&&strpos($cur_url,Yii::$app->params['top_domain'].'/en')===false){
-            if($cur_url==Yii::$app->params['m_domain'].'/'){
-                $view->params['cur_en_url'] = str_replace(Yii::$app->params['top_domain'].'/', Yii::$app->params['top_domain'].'/en', $cur_url);
-            }else{
-                $view->params['cur_en_url'] = str_replace(Yii::$app->params['top_domain'], Yii::$app->params['top_domain'].'/en', $cur_url);
-            }
-        }
-        if(strpos($cur_url,Yii::$app->params['top_domain'].'/en')!==false){
-            $view->params['cur_url'] = str_replace(Yii::$app->params['top_domain'].'/en', Yii::$app->params['top_domain'], $cur_url);
-        }
-        $nav_model = new Navigator();
-        $cate_model = new Category();
-        $view->params['wlcxs'] = $this->getContents(['wlcxs']);//$cate_model->getWlcxsUrl();
-        $view->params['class_one'] = $nav_model->getNavigatorWhenError(1,$this->language);
-        $view->params['class_two'] = $nav_model->getNavigatorWhenError(2,$this->language);
-        $flags = ['friend_link','footer_join','footer_media','footer_business'];
-        $footer_contents = $this->getContents($flags);
-        $view->params['friend_link'] = isset($footer_contents['friend_link'][0]['id']) ? $footer_contents['friend_link'] : false;
-        $view->params['footer_join'] = isset($footer_contents['footer_join'][0]['id']) ? $footer_contents['footer_join'][0] : false;
-        $view->params['footer_media'] = isset($footer_contents['footer_media'][0]['id']) ? $footer_contents['footer_media'][0] : false;
-        $view->params['footer_business'] = isset($footer_contents['footer_business'][0]['id']) ? $footer_contents['footer_business'][0] : false;
     }
     /**
      * 默认中文

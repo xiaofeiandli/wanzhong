@@ -12,7 +12,6 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use frontend\models\Navigator;
 
 /**
  * Site controller
@@ -74,11 +73,7 @@ class SiteController extends BaseController
     {
         $view = Yii::$app->view;
         $view->params['item'] = 'site';
-        $nav_model = new Navigator();
-        $view->params['class_one'] = $nav_model->getNavigator(1,$this->language);
-        $view->params['class_two'] = $nav_model->getNavigator(2,$this->language);
-        $flags = ['person_entrance','media_entrance','company_entrance','index_banner','site_banner'];
-        return $this->render('index',$this->getContents($flags,$this->language));
+        return $this->render('index');
     }
 
 
