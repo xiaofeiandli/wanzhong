@@ -2,17 +2,24 @@
 use yii\web\View;
 $this->title = '首页';
 ?>
-	<div class="banners">
-		<div class="banner-item banner">
-			<img class="banner-image" src="images/banner.png">
+
+	<div class="body" id="index">
+		<div class="banners" id="banners">
+			<div class="banner-item">
+				<img class="banner-image" src="images/banner.png">
+			</div>
+			<div class="banner-item">
+				<img class="banner-image" src="images/banner.png">
+			</div>
+			<div class="banner-item">
+				<img class="banner-image" src="images/banner.png">
+			</div>
+			<div class="banner-btns" id="banner_btns">
+				<span class="banner-btn current"></span>
+				<span class="banner-btn"></span>
+				<span class="banner-btn"></span>
+			</div>
 		</div>
-		<div class="banner-btns">
-			<span class="banner-btn current"></span>
-			<span class="banner-btn"></span>
-			<span class="banner-btn"></span>
-		</div>
-	</div>
-	<div class="body">
 		<div class="container">
 			<div class="index clearfix">
 				<div class="index-image">

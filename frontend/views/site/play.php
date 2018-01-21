@@ -2,14 +2,18 @@
 use yii\web\View;
 $this->title = '播放';
 ?>
-	<div class="body bg-color">
+	<div class="body bg-color" id="play_page">
 		<div class="container">
 			<div class="play">
 				<div class="list-header">
 					<span class="list-text"><strong>在荒芜中丰收地活着</strong></span>
 				</div> 
 				<div class="play-content">
-					<div class="player"></div>
+					<div class="player">
+						<video id="player">
+							<source src="" type="video/mp4">
+						</video>
+					</div>
 					<div class="play-list">
 						<div class="play-item">
 							<div class="play-thumb">

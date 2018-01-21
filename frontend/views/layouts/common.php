@@ -17,6 +17,9 @@ $actionID = Yii::$app->controller->action->id;
     <meta content="" name="description" />
     <meta content="" name="author" />
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="/js/vendor/mplayer/css/mplayer.css">
+    <link rel="stylesheet" type="text/css" href="/js/vendor/mediaelement/mediaelementplayer.min.css">
+    <link rel="stylesheet" type="text/css" href="/js/vendor/fancybox/jquery.fancybox.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 	<div class="header">
@@ -34,8 +37,8 @@ $actionID = Yii::$app->controller->action->id;
 				<li <?php if($actionID=='music'){?>class="active"<?php }?>>
 					<a href="/music"><img src="/images/音乐.png"></a>
 				</li>
-				<li <?php if($actionID=='planting'){?>class="active"<?php }?>>
-					<a href="/planting"><img src="/images/画作.png"></a>
+				<li <?php if($actionID=='picture1'){?>class="active"<?php }?>>
+					<a href="/picture1"><img src="/images/画作.png"></a>
 				</li>
 				<li <?php if($actionID=='calligraphy'){?>class="active"<?php }?>>
 					<a href="/calligraphy"><img src="/images/书法.png"></a>
@@ -56,5 +59,20 @@ $actionID = Yii::$app->controller->action->id;
 			<div><span class="footer-margin">京ICP备18002956号</span><span>皖公网备案34010402700146号</span></div>
 		</div>
 	</div>
+	<script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/vendor/jquery-migrate.min.js"></script>
+	<!--img start-->
+	<script type="text/javascript" src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
+	<!--img start-->
+	<!--music start-->
+	<script type="text/javascript" src="/js/vendor/mplayer/js/mplayer.js"></script>
+	<script type="text/javascript" src="/js/vendor/mplayer/js/jquery.nstSlider.js"></script>
+	<script type="text/javascript" src="/js/vendor/mplayer/js/mplayer-list.js"></script>
+	<script type="text/javascript" src="/js/vendor/mplayer/js/mplayer-functions.js"></script>
+	<!--music end-->
+	<!--mv start-->
+	<script type="text/javascript" src="/js/vendor/mediaelement/mediaelement-and-player.min.js"></script>
+	<!--mv end-->
+	<script type="text/javascript" src="/js/main.js"></script>
 </html>
 <?php $this->endPage() ?>
