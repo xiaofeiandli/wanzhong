@@ -219,17 +219,23 @@ class SiteController extends BaseController
     {
         return $this->render('mv');
     }
+
+    public function actionPlay()
+    {
+        return $this->render('play');
+    }
+
     public function actionMusic()
     {
         return $this->render('music');
     }
-    public function actionPlanting()
+    public function actionPicture1()
     {
-        return $this->render('planting');
+        return $this->render('picture1');
     }
     public function actionCalligraphy()
     {
-        return $this->render('planting');
+        return $this->render('calligraphy');
     }
     public function actionPoem()
     {
