@@ -10,7 +10,7 @@ class Article extends Model
 {
     public function getList($type,$page,$limit,$orderby)
     {
-        $start = ($page-1)*$limit+1;
+        $start = ($page-1)*$limit;
         $sql = "select * from article where category = {$type} and status = 1 order by '{$orderby}' desc limit {$start},{$limit}";
         $res = Yii::$app->db->createCommand($sql)->queryAll();
         if(isset($res[0]['id'])){
