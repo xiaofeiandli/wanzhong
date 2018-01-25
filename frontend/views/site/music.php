@@ -12,67 +12,11 @@ $this->title = '音乐';
 				<div class="music-list" id="music_list">
 					<table>
 						<tbody>
-							<tr>
-								<td class="music-order">01</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">02</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">03</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">04</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">05</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">06</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">07</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">08</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
-								<td class="music-time">6:30</td>
-							</tr>
-							<tr>
-								<td class="music-order">09</td>
-								<td class="music-title one-hidden">万中原创音乐——在荒芜中丰收地活着</td>
-								<td class="music-action"><span></span></td>
-								<td class="music-counts"><span><i class="icon"></i>5678</span></td>
+							<tr v-for='(item,idx) in lists'>
+								<td class="music-order" v-text='idx'></td>
+								<td class="music-title one-hidden" v-text="item.name"></td>
+								<td class="music-action"><span @click='play(idx)'></span></td>
+								<td class="music-counts"><span><i class="icon"></i>{{item.count}}</span></td>
 								<td class="music-time">6:30</td>
 							</tr>
 						</tbody>

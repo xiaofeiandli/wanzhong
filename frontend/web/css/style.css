@@ -22,6 +22,9 @@ a {
 a:focus {
     outline: none;
 }
+html,body{
+    height: 100%;
+}
 body {
     position: relative;
     min-width: 1080px;
@@ -48,7 +51,13 @@ body {
 
 
 /*header*/
-
+.header{
+    position: absolute;
+    height: 121px;
+    width: 100%;
+    top: 0;
+    background-color: #fff;
+}
 .header>.container>* {
     float: left;
 }
@@ -93,6 +102,9 @@ body {
 }
 /*body*/
 .body{
+    min-height: 100%;
+    padding-top: 121px;
+    padding-bottom: 102px;
 	/* margin-bottom: 174px; */
 }
 
@@ -100,6 +112,7 @@ body {
 
 .footer {
     background-color: #000;
+    margin-top: -102px;
     padding: 38px 0 44px;
     color: #fff;
     font-size: 14px;
@@ -405,6 +418,7 @@ body {
 	float: left;
 	padding: 5px;
     width: 220px;
+    height: 128px;
     margin: 0 13px 25px;
 	font-size: 0;
 	line-height: 0;

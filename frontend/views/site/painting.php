@@ -1,10 +1,11 @@
 <?php
 use yii\web\View;
-$this->title = '书法';
-?>
-	<div class="body bg-color" id="writing">
+$this->title = '画';
+?> 
+	<div class="body bg-color" id="img" v-cloak>
 		<div class="container">
 			<div class="planting clearfix">
+
 				<div v-for="item in lists" class="planting-item">
 					<a class="fancybox" rel='group' :href="item.path" :title="item.name">
 					<img :src="item.path" >

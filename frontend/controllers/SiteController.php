@@ -229,9 +229,9 @@ class SiteController extends BaseController
     {
         return $this->render('music');
     }
-    public function actionPicture1()
+    public function actionPainting()
     {
-        return $this->render('picture1');
+        return $this->render('painting');
     }
     public function actionCalligraphy()
     {

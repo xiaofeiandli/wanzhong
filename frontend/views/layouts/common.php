@@ -37,8 +37,8 @@ $actionID = Yii::$app->controller->action->id;
 				<li <?php if($actionID=='music'){?>class="active"<?php }?>>
 					<a href="/music"><img src="/images/音乐.png"></a>
 				</li>
-				<li <?php if($actionID=='picture1'){?>class="active"<?php }?>>
-					<a href="/picture1"><img src="/images/画作.png"></a>
+				<li <?php if($actionID=='painting'){?>class="active"<?php }?>>
+					<a href="/painting"><img src="/images/画作.png"></a>
 				</li>
 				<li <?php if($actionID=='calligraphy'){?>class="active"<?php }?>>
 					<a href="/calligraphy"><img src="/images/书法.png"></a>
@@ -60,19 +60,34 @@ $actionID = Yii::$app->controller->action->id;
 		</div>
 	</div>
 	<script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
+<?php if($actionID=='painting' || $actionID=='calligraphy'){?>
+	<!--img start-->
 	<script type="text/javascript" src="/js/vendor/jquery-migrate.min.js"></script>
-	<!--img start-->
+	
 	<script type="text/javascript" src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="/js/vendor/vue-2.4.4/vue.min.js"></script>
+	<script type="text/javascript" src=""></script>
 	<!--img start-->
+
+<?php }?>
+	
+<?php if($actionID=='music'){?>
 	<!--music start-->
+	<script type="text/javascript" src="/js/vendor/vue-2.4.4/vue.min.js"></script>
+	
 	<script type="text/javascript" src="/js/vendor/mplayer/js/mplayer.js"></script>
 	<script type="text/javascript" src="/js/vendor/mplayer/js/jquery.nstSlider.js"></script>
 	<script type="text/javascript" src="/js/vendor/mplayer/js/mplayer-list.js"></script>
 	<script type="text/javascript" src="/js/vendor/mplayer/js/mplayer-functions.js"></script>
 	<!--music end-->
+<?php }?>
+	
+<?php if($actionID=='play'){?>
 	<!--mv start-->
 	<script type="text/javascript" src="/js/vendor/mediaelement/mediaelement-and-player.min.js"></script>
 	<!--mv end-->
+<?php }?>
+
 	<script type="text/javascript" src="/js/main.js"></script>
 </html>
 <?php $this->endPage() ?>

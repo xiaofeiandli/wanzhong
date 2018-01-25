@@ -50,13 +50,80 @@ var Index = function() {
 };
 
 // 图片查看
-var Img = function(){
+var Img = function() {
 
-	$(".fancybox").fancybox({
-		cyclic: true,
-		titleShow: true
-	});
+    $(".fancybox").fancybox({
+        cyclic: true,
+        titleShow: true
+    });
 
+    new Vue({
+        el: '#img',
+        data: {
+            lists: []
+        },
+        mounted: function() {
+            this.getInfo();
+        },
+        methods: {
+            getInfo: function() {
+                var that = this;
+                $.ajax({
+                    url: '/api/list',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        type: 'image',
+                        page: 1,
+                        limit: 40
+                    },
+                    success: function(res) {
+                        if (res.code == 0) {
+                            that.lists = res.data;
+                        }
+                    }
+                })
+            }
+        }
+    })
+};
+
+var Audio = function() {
+
+    $(".fancybox").fancybox({
+        cyclic: true,
+        titleShow: true
+    });
+
+    new Vue({
+        el: '#audio',
+        data: {
+            lists: []
+        },
+        mounted: function() {
+            this.getInfo();
+        },
+        methods: {
+            getInfo: function() {
+                var that = this;
+                $.ajax({
+                    url: '/api/list',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        type: 'audio',
+                        page: 1,
+                        limit: 40
+                    },
+                    success: function(res) {
+                        if (res.code == 0) {
+                            that.lists = res.data;
+                        }
+                    }
+                })
+            }
+        }
+    })
 };
 
 
@@ -67,82 +134,138 @@ var Music = function() {
 
     var modeText = ['顺序播放', '单曲循环', '随机播放', '列表循环'];
 
-    var player = new MPlayer({
-        // 容器选择器名称
-        containerSelector: '#music_player',
-        // 播放列表
-        songList: mplayer_song,
-        // 专辑图片错误时显示的图片
-        defaultImg: 'img/mplayer_error.png',
-        // 自动播放
-        autoPlay: false,
-        // 播放模式(0->顺序播放,1->单曲循环,2->随机播放,3->列表循环(默认))
-        playMode: 0,
-        playList: 0,
-        playSong: 0,
-        // 当前歌词距离顶部的距离
-        lrcTopPos: 34,
-        // 列表模板，用${变量名}$插入模板变量
-        listFormat: '<tr><td>${name}$</td><td>${singer}$</td><td>${time}$</td></tr>',
-        // 音量滑块改变事件名称
-        volSlideEventName: 'change',
-        // 初始音量
-        defaultVolume: 60
-    }, function() {
-        // 绑定事件
-        this.on('afterInit', function() {
-            console.log('播放器初始化完成，正在准备播放');
-        }).on('beforePlay', function() {
-            var $this = this;
-            var song = $this.getCurrentSong(true);
-            var songName = song.name + ' - ' + song.singer;
-            console.log('即将播放' + songName + '，return false;可以取消播放');
-        }).on('timeUpdate', function() {
-            var $this = this;
-            console.log('当前歌词：' + $this.getLrc());
-        }).on('end', function() {
-            var $this = this;
-            var song = $this.getCurrentSong(true);
-            var songName = song.name + ' - ' + song.singer;
-            //console.log(songName + '播放完毕，return false;可以取消播放下一曲');
-        }).on('mute', function() {
-            var status = this.getIsMuted() ? '已静音' : '未静音';
-            //console.log('当前静音状态：' + status);
-        }).on('changeMode', function() {
-            var $this = this;
-            var mode = modeText[$this.getPlayMode()];
-            $this.dom.container.find('.mp-mode').attr('title', mode);
-            //console.log('播放模式已切换为：' + mode);
+    var player =
+
+
+        //$(document.body).append(player.audio); // 测试用
+
+
+
+
+        // 显示播放器
+        /*$playerContainer.on("mouseover", function() {
+            console.log(1);
+            //$(this).css('bottom', 0);
         });
-    });
+
+        // 隐藏播放器
+        $playerContainer.on("mouseout", function() {
+            var that = this;
+            setTimeout(function() {
+                //$(that).css('bottom', '-50px')
+            }, 5000)
+        });*/
 
 
-    //$(document.body).append(player.audio); // 测试用
+        new Vue({
+            el: '#music',
+            data: {
+                lists: [],
+                songs: [
+                    [{
+                        "basic": true,
+                        "name": "播放列表",
+                        "singer": "万中",
+                        "img": ''
+                    }]
+                ],
+                player: ''
+            },
+            mounted: function() {
+                this.getInfo();
+            },
+            methods: {
+                getInfo: function() {
+                    var that = this;
 
-    setEffects(player);
+                    $.ajax({
+                        url: '/api/list',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            type: 'audio',
+                            page: 1,
+                            limit: 10
+                        },
+                        success: function(res) {
+                            if (res.code == 0) {
 
-    // 点击列表播放
-    $("#music_list").on('click', 'tr', function() {
-        var index = $(this).index();
-        //console.log(mplayer_song[0]);
-        //console.log(index);
-        player.play(0, index);
-    })
+                                that.lists = res.data;
 
-    // 显示播放器
-    $playerContainer.on("mouseover", function() {
-        console.log(1);
-        //$(this).css('bottom', 0);
-    });
+                                for(var i = 0; i < res.data.length; i++){
+                                    that.songs[0].push({
+                                        name: res.data[i].name,
+                                        singer: '万中',
+                                        src: res.data[i].path,
+                                        img: res.data[i].thumb,
+                                        lrc: ''
+                                    })
+                                }
+                                console.log(that.songs)
+                                that.createPlayer();
+                                setEffects(that.player);
 
-    // 隐藏播放器
-    $playerContainer.on("mouseout", function() {
-        var that = this;
-        setTimeout(function() {
-            //$(that).css('bottom', '-50px')
-        }, 5000)
-    });
+                            }
+                        }
+                    })
+                },
+                createPlayer: function() {
+                    var that = this;
+                    this.player = new MPlayer({
+                        // 容器选择器名称
+                        containerSelector: '#music_player',
+                        // 播放列表
+                        songList: that.songs,
+                        // 专辑图片错误时显示的图片
+                        defaultImg: '/images/logo.png',
+                        // 自动播放
+                        autoPlay: false,
+                        // 播放模式(0->顺序播放,1->单曲循环,2->随机播放,3->列表循环(默认))
+                        playMode: 0,
+                        playList: 0,
+                        playSong: 0,
+                        // 当前歌词距离顶部的距离
+                        lrcTopPos: 34,
+                        // 列表模板，用${变量名}$插入模板变量
+                        listFormat: '<tr><td>${name}$</td><td>${singer}$</td><td>${time}$</td></tr>',
+                        // 音量滑块改变事件名称
+                        volSlideEventName: 'change',
+                        // 初始音量
+                        defaultVolume: 60
+                    }, function() {
+                        // 绑定事件
+                        this.on('afterInit', function() {
+                            console.log('播放器初始化完成，正在准备播放');
+                        }).on('beforePlay', function() {
+                            var $this = this;
+                            var song = $this.getCurrentSong(true);
+                            var songName = song.name + ' - ' + song.singer;
+                            console.log('即将播放' + songName + '，return false;可以取消播放');
+                        }).on('timeUpdate', function() {
+                            var $this = this;
+                            console.log('当前歌词：' + $this.getLrc());
+                        }).on('end', function() {
+                            var $this = this;
+                            var song = $this.getCurrentSong(true);
+                            var songName = song.name + ' - ' + song.singer;
+                            //console.log(songName + '播放完毕，return false;可以取消播放下一曲');
+                        }).on('mute', function() {
+                            var status = this.getIsMuted() ? '已静音' : '未静音';
+                            //console.log('当前静音状态：' + status);
+                        }).on('changeMode', function() {
+                            var $this = this;
+                            var mode = modeText[$this.getPlayMode()];
+                            $this.dom.container.find('.mp-mode').attr('title', mode);
+                            //console.log('播放模式已切换为：' + mode);
+                        });
+                    });
 
+                },
+                play: function(idx) {
+                    this.player.play(0, idx);
+                }
+            }
+        })
 
 }
 
