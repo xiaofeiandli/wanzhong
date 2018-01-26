@@ -165,7 +165,12 @@ var Resource = function(){
 
 		// 修改上传参数
 		uploader.on("uploadBeforeSend",function(object,data){
-			data["type_name"] = "image";
+			var type = 'image';
+			
+			if($("#calligraphy").is(':checked')){
+				type = 'calligraphy'
+			}
+			data["type_name"] = type;
 		});
 
 		// 文件上传过程中创建进度条实时显示。

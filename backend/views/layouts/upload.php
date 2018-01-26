@@ -65,7 +65,26 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">图像上传</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body form-horizontal">
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">分类</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="icheck-inline">
+                                    <div class="md-radio-inline">
+                                        <div class="md-radio">
+                                            <input class="icheck" type='radio' value='image' id="painting" name="type_name" class="md-radiobtn" checked>
+                                            <label for="painting"><span></span><span class="check"></span><span class="box"></span>画作</label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input class="icheck" type='radio' value='calligraphy' id="calligraphy" name="type_name" class="md-radiobtn">
+                                            <label for="calligraphy"><span></span><span class="check"></span><span class="box"></span>书法</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div class="uploader">
                     <div id="file_list" class="uploader-list clearfix"></div>
                 </div>
