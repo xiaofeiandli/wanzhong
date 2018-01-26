@@ -9,7 +9,7 @@ class Resource extends Base
 	/**
      * 获取资源库中的图片
      */
-    public function getPictures()
+    public function getImage()
     {
         $res = Yii::$app->db->createCommand("select * from resource where type = 'image' order by created_at desc")->queryAll();
         if(count($res)==0){
@@ -23,11 +23,40 @@ class Resource extends Base
         return $res;
     }
     /**
+     * 获取资源库中的图片
+     */
+    public function getCalligraphy()
+    {
+        $res = Yii::$app->db->createCommand("select * from resource where type = 'calligraphy' order by created_at desc")->queryAll();
+        if(count($res)==0){
+            $res = false;
+        }else{
+            foreach($res as $k=>$v){
+                $res[$k]['path'] = Yii::$app->params['img_domain'] . $v['path'];
+                $res[$k]['thumb'] = Yii::$app->params['img_domain'] . $v['path'];
+            }
+        }
+        return $res;
+    }
+    /**
      * 获取资源库中的图片数量
      */
-    public function getPicCount()
+    public function getImageCount()
     {
         $res = Yii::$app->db->createCommand("select count(*) as count from resource where type = 'image'")->queryAll();
+        if(isset($res[0]['count'])){
+            $result = $res[0]['count'];
+        }else{
+            $result = 0;
+        }
+        return $result;
+    }
+    /**
+     * 获取资源库中的图片数量
+     */
+    public function getCalligraphyCount()
+    {
+        $res = Yii::$app->db->createCommand("select count(*) as count from resource where type = 'calligraphy'")->queryAll();
         if(isset($res[0]['count'])){
             $result = $res[0]['count'];
         }else{

@@ -30,7 +30,7 @@ class ApiController extends BaseController
         if(!in_array($orderby, ['created_at','read'])){
             $orderby = 'created_at';
         }
-        if(!in_array($type, ['lyric','poem','video','audio','image'])){
+        if(!in_array($type, ['lyric','poem','video','audio','image','calligraphy'])){
             $this->renderJson(999, [], '参数有误');
         }
         if($type=='lyric'){
@@ -48,6 +48,9 @@ class ApiController extends BaseController
         }elseif($type=='image'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
+        }elseif($type=='calligraphy'){
+            $resource_model = new Resource();
+            $res = $resource_model->getList($type,$page,$limit,$orderby);
         }else{
             $res = false;
         }
@@ -60,13 +63,13 @@ class ApiController extends BaseController
     {
         $id = Yii::$app->request->post('id');
         $type = Yii::$app->request->post('type','lyric');
-        if(!in_array($type, ['lyric','poem','video','audio','image'])){
+        if(!in_array($type, ['lyric','poem','video','audio','image','calligraphy'])){
             $this->renderJson(999, [], '参数有误');
         }
         if(in_array($type, ['lyric','poem'])){
             $article_model = new Article();
             $res = $article_model->getDetail($id);
-        }elseif(in_array($type, ['video','audio','image'])){
+        }elseif(in_array($type, ['video','audio','image','calligraphy'])){
             $resource_model = new Resource();
             $res = $resource_model->getDetail($id);
         }else{
@@ -81,13 +84,13 @@ class ApiController extends BaseController
     {
         $id = Yii::$app->request->post('id');
         $type = Yii::$app->request->post('type','lyric');
-        if(!in_array($type, ['lyric','poem','video','audio','image'])){
+        if(!in_array($type, ['lyric','poem','video','audio','image','calligraphy'])){
             $this->renderJson(999, [], '参数有误');
         }
         if(in_array($type, ['lyric','poem'])){
             $article_model = new Article();
             $res = $article_model->addReadCount($id);
-        }elseif(in_array($type, ['video','audio','image'])){
+        }elseif(in_array($type, ['video','audio','image','calligraphy'])){
             $resource_model = new Resource();
             $res = $resource_model->addReadCount($id);
         }else{

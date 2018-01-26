@@ -69,7 +69,8 @@ class SiteController extends BaseController
         $resource_model = new Resource();
         $count['video'] = $resource_model->getVideoCount();
         $count['audio'] = $resource_model->getAudioCount();
-        $count['pic'] = $resource_model->getPicCount();
+        $count['image'] = $resource_model->getImageCount();
+        $count['calligraphy'] = $resource_model->getCalligraphyCount();
         $count['poem'] = $article_model->getPoemCount();
         $count['lyric'] = $article_model->getLyricCount();
         return $this->render('index',['count'=>$count]);

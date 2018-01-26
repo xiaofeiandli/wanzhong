@@ -46,10 +46,28 @@ $this->title = '后台总览';
 			</div>
 			<div class="details">
 				<div class="number">
-					 <?=$count['pic']?>
+					 <?=$count['calligraphy']?>
 				</div>
 				<div class="desc">
-					 图像
+					 书法
+				</div>
+			</div>
+			<a class="more" href="/resource/index/calligraphy">
+			View more <i class="m-icon-swapright m-icon-white"></i>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		<div class="dashboard-stat red">
+			<div class="visual">
+				<i class="fa fa-file-picture-o"></i>
+			</div>
+			<div class="details">
+				<div class="number">
+					 <?=$count['image']?>
+				</div>
+				<div class="desc">
+					 画
 				</div>
 			</div>
 			<a class="more" href="/resource/index/image">

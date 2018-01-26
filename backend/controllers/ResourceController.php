@@ -27,19 +27,27 @@ class ResourceController extends BaseController
         $view = Yii::$app->view;
         $view->params['item'] = 'resource';
         $resource_model = new Resource();
-        $pic_res = $resource_model->getPictures();
+        $image_res = $resource_model->getImage();
+        $calligraphy_res = $resource_model->getCalligraphy();
         $video_res = $resource_model->getVideo();
         $audio_res = $resource_model->getAudio();
         $type = Yii::$app->request->get('type','image');
-        if(!in_array($type, ['image','video','audio'])){
+        if(!in_array($type, ['image','video','audio','calligraphy'])){
             $type = 'image';
         }
         $view->params['type'] = $type;
-        if(is_array($pic_res)&&count($pic_res)>0){
-            foreach($pic_res as $k=>$v){
-                $pic_res[$k]['path'] = $this->_qiniuDnToken($v['path']);
-                $pic_res[$k]['thumb'] = $this->_qiniuDnToken($v['thumb']);
-                $pic_res[$k]['description'] = substr($v['name'],0,strrpos($v['name'],'.'));
+        if(is_array($image_res)&&count($image_res)>0){
+            foreach($image_res as $k=>$v){
+                $image_res[$k]['path'] = $this->_qiniuDnToken($v['path']);
+                $image_res[$k]['thumb'] = $this->_qiniuDnToken($v['thumb']);
+                $image_res[$k]['description'] = substr($v['name'],0,strrpos($v['name'],'.'));
+            }
+        }
+        if(is_array($calligraphy_res)&&count($calligraphy_res)>0){
+            foreach($calligraphy_res as $k=>$v){
+                $calligraphy_res[$k]['path'] = $this->_qiniuDnToken($v['path']);
+                $calligraphy_res[$k]['thumb'] = $this->_qiniuDnToken($v['thumb']);
+                $calligraphy_res[$k]['description'] = substr($v['name'],0,strrpos($v['name'],'.'));
             }
         }
         if(is_array($video_res)&&count($video_res)>0){
@@ -58,8 +66,9 @@ class ResourceController extends BaseController
         }
         $count['video'] = $resource_model->getVideoCount();
         $count['audio'] = $resource_model->getAudioCount();
-        $count['pic'] = $resource_model->getPicCount();
-        return $this->render('index',array('type'=>$type,'pictures'=>$pic_res,'video'=>$video_res,'audio'=>$audio_res,'count'=>$count));
+        $count['image'] = $resource_model->getImageCount();
+        $count['calligraphy'] = $resource_model->getCalligraphyCount();
+        return $this->render('index',array('type'=>$type,'image'=>$image_res,'calligraphy'=>$calligraphy_res,'video'=>$video_res,'audio'=>$audio_res,'count'=>$count));
     }
     /**
      * 资源上传
@@ -69,11 +78,13 @@ class ResourceController extends BaseController
         if(!$this->isLogin()){
             $this->renderJson(999, [], '您的账号未登录');
         }
-        $type = Yii::$app->request->post('type_name','image');
+        $type = Yii::$app->request->post('type_name','image');//print_r($type);exit;
         if(!isset($_FILES['file'])){
             $this->renderJson(999, [], '网络异常');
-        }
-        if(!in_array($type, explode('/', $_FILES['file']['type']))){
+        }//print_r($_FILES['file']['type']);exit;
+        $type_arr = explode('/', $_FILES['file']['type']);
+        $type_arr[] = 'calligraphy';//print_r($type_arr);exit;
+        if(!in_array($type, $type_arr)){
             $this->renderJson(999, [], '分类选择或资源格式有误');
         }
         $name = Yii::$app->request->post('name','');
