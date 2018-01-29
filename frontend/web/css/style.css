@@ -174,7 +174,9 @@ body {
     background-color: rgba(58, 86, 96, .6)
 }
 
-
+[v-cloak]{
+    display: none;
+}
 /*首页*/
 
 .index {
@@ -193,7 +195,10 @@ body {
 
 
 /*mv*/
-
+.empty-tip{
+    height: 100%;
+    text-align: center;
+}
 .bg-color {
     background-color: #ddf0f2;
     overflow: hidden;

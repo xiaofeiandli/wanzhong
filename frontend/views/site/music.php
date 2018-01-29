@@ -4,7 +4,7 @@ $this->title = '音乐';
 ?>
 	<div class="body bg-color" id="music">
 		<div class="container">
-			<div class="music">
+			<div class="music" :style="{height: height+ 'px'}">
 				<div class="list-header">
 					<span class="list-text">音乐</span>
 					<span class="list-sort">按上传时间</span>
@@ -17,7 +17,7 @@ $this->title = '音乐';
 								<td class="music-title one-hidden" v-text="item.name"></td>
 								<td class="music-action"><span @click='play(idx)'></span></td>
 								<td class="music-counts"><span><i class="icon"></i>{{item.count}}</span></td>
-								<td class="music-time">6:30</td>
+								<td class="music-time">4:03</td>
 							</tr>
 						</tbody>
 					</table>

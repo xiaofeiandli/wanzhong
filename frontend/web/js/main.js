@@ -49,6 +49,41 @@ var Index = function() {
 
 };
 
+var Mv = function(){
+
+    new Vue({
+        el: '#video',
+        data: {
+            lists: [],
+            height: 0
+        },
+        mounted: function() {
+            this.height = getHeight();
+            this.getInfo();
+        },
+        methods: {
+            getInfo: function() {
+                var that = this;
+                $.ajax({
+                    url: '/api/list',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        type: 'video',
+                        page: 1,
+                        limit: 40
+                    },
+                    success: function(res) {
+                        if (res.code == 0) {
+                            that.lists = res.data;
+                        }
+                    }
+                })
+            }
+        }
+    })
+}
+
 // 图片查看
 var Img = function() {
 
@@ -88,7 +123,15 @@ var Img = function() {
     })
 };
 
-var Audio = function() {
+function getHeight(){
+    var minHeight = 400,
+        height = $(document).height() -323;
+
+    return height > minHeight ? height : minHeight;
+}
+
+// 书法查看
+var Write = function(){
 
     $(".fancybox").fancybox({
         cyclic: true,
@@ -96,11 +139,13 @@ var Audio = function() {
     });
 
     new Vue({
-        el: '#audio',
+        el: '#writing',
         data: {
-            lists: []
+            lists: [],
+            height: 0
         },
         mounted: function() {
+            this.height = getHeight();
             this.getInfo();
         },
         methods: {
@@ -111,7 +156,7 @@ var Audio = function() {
                     type: 'post',
                     dataType: 'json',
                     data: {
-                        type: 'audio',
+                        type: 'calligraphy',
                         page: 1,
                         limit: 40
                     },
@@ -124,7 +169,7 @@ var Audio = function() {
             }
         }
     })
-};
+}
 
 
 // 音乐播放
@@ -134,7 +179,7 @@ var Music = function() {
 
     var modeText = ['顺序播放', '单曲循环', '随机播放', '列表循环'];
 
-    var player =
+    //var player =
 
 
         //$(document.body).append(player.audio); // 测试用
@@ -169,9 +214,11 @@ var Music = function() {
                         "img": ''
                     }]
                 ],
+                height: 0,
                 player: ''
             },
             mounted: function() {
+                this.height = getHeight();
                 this.getInfo();
             },
             methods: {
@@ -293,12 +340,54 @@ var Play = function() {
 
 
 }
+
+
+var Poem = function(){
+
+        new Vue({
+        el: '#poem',
+        data: {
+            lists: [],
+            height: 0
+        },
+        mounted: function() {
+            this.height = getHeight();
+            this.getInfo();
+        },
+        methods: {
+            getInfo: function() {
+                var that = this;
+                $.ajax({
+                    url: '/api/list',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        type: 'poem',
+                        page: 1,
+                        limit: 40
+                    },
+                    success: function(res) {
+                        if (res.code == 0) {
+                            that.lists = res.data;
+                        }
+                    }
+                })
+            }
+        }
+    })
+}
 $(document).ready(function() {
     $("#index").get(0) && Index();
 
+    $("#video").get(0) && Mv();
+
     $("#img").get(0) && Img();
+
+    $("#writing").get(0) && Write();
 
     $("#music").get(0) && Music();
 
     $("#play_page").get(0) && Play();
+
+    $("#poem").get(0) && Poem();
 })

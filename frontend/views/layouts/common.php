@@ -60,13 +60,13 @@ $actionID = Yii::$app->controller->action->id;
 		</div>
 	</div>
 	<script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/vendor/vue-2.4.4/vue.min.js"></script>
+	
 <?php if($actionID=='painting' || $actionID=='calligraphy'){?>
 	<!--img start-->
 	<script type="text/javascript" src="/js/vendor/jquery-migrate.min.js"></script>
 	
 	<script type="text/javascript" src="/js/vendor/fancybox/jquery.fancybox.pack.js"></script>
-	<script type="text/javascript" src="/js/vendor/vue-2.4.4/vue.min.js"></script>
-	<script type="text/javascript" src=""></script>
 	<!--img start-->
 
 <?php }?>
