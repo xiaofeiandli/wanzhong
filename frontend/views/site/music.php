@@ -4,7 +4,7 @@ $this->title = '音乐';
 ?>
 	<div class="body bg-color" id="music">
 		<div class="container">
-			<div class="music" :style="{height: height+ 'px'}">
+			<div class="music" :style="{'min-height': height+ 'px'}">
 				<div class="list-header">
 					<span class="list-text">音乐</span>
 					<span class="list-sort">按上传时间</span>

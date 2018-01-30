@@ -4,7 +4,7 @@ $this->title = '书法';
 ?>
 	<div class="body bg-color" id="writing">
 		<div class="container">
-			<div class="planting clearfix" :style="{height: height+ 'px'}">
+			<div class="planting clearfix" :style="{'min-height': height+ 'px'}">
 				<template v-if='lists.length>0'>
 					<div v-for="item in lists" class="planting-item">
 						<a class="fancybox" rel='group' :href="item.path" :title="item.name">

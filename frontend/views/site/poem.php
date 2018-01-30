@@ -4,7 +4,7 @@ $this->title = '诗';
 ?>
 	<div class="body bg-color" id="poem" v-cloak>
 		<div class="container">
-			<div class="poem clearfix"   :style="{height: height+ 'px'}">
+			<div class="poem clearfix"   :style="{'min-height': height+ 'px'}">
 				<div class="list-header">
 					<span class="list-text">歌词</span>
 					<span class="list-text list-text-color">诗</span>

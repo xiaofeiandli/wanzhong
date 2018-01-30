@@ -4,7 +4,7 @@ $this->title = 'MV';
 ?>
 	<div class="body bg-color" id="video">
 		<div class="container">
-			<div class="mv"  :style="{height: height+ 'px'}">
+			<div class="mv"  :style="{'min-height': height+ 'px'}">
 				<div class="list-header">
 					<span class="list-text">MV</span>
 					<span class="list-sort">按上传时间</span>

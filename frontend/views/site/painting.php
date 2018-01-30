@@ -4,7 +4,7 @@ $this->title = '画';
 ?> 
 	<div class="body bg-color" id="img" v-cloak>
 		<div class="container">
-			<div class="planting clearfix">
+			<div class="planting clearfix"  :style="{'min-height': height+ 'px'}">
 				<template v-if="lists.length > 0">
 					<div v-for="item in lists" class="planting-item">
 						<a class="fancybox" rel='group' :href="item.path" :title="item.name">

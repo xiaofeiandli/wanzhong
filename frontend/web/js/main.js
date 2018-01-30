@@ -95,9 +95,11 @@ var Img = function() {
     new Vue({
         el: '#img',
         data: {
-            lists: []
+            lists: [],
+            height: 0
         },
         mounted: function() {
+            this.height = getHeight();
             this.getInfo();
         },
         methods: {
