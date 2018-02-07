@@ -44,19 +44,19 @@ class ApiController extends BaseController
         }elseif($type=='video'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
-            $count = $article_model->getCount($type);
+            $count = $resource_model->getCount($type);
         }elseif($type=='audio'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
-            $count = $article_model->getCount($type);
+            $count = $resource_model->getCount($type);
         }elseif($type=='image'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
-            $count = $article_model->getCount($type);
+            $count = $resource_model->getCount($type);
         }elseif($type=='calligraphy'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
-            $count = $article_model->getCount($type);
+            $count = $resource_model->getCount($type);
         }else{
             $res = false;
             $count = 0;
