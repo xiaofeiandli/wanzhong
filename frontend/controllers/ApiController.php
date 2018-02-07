@@ -36,28 +36,35 @@ class ApiController extends BaseController
         if($type=='lyric'){
             $article_model = new Article();
             $res = $article_model->getList(1,$page,$limit,$orderby);
+            $count = $article_model->getCount(1);
         }elseif($type=='poem'){
             $article_model = new Article();
             $res = $article_model->getList(2,$page,$limit,$orderby);
+            $count = $article_model->getCount(2);
         }elseif($type=='video'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
+            $count = $article_model->getCount($type);
         }elseif($type=='audio'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
+            $count = $article_model->getCount($type);
         }elseif($type=='image'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
+            $count = $article_model->getCount($type);
         }elseif($type=='calligraphy'){
             $resource_model = new Resource();
             $res = $resource_model->getList($type,$page,$limit,$orderby);
+            $count = $article_model->getCount($type);
         }else{
             $res = false;
+            $count = 0;
         }
         if(!$res){
             $this->renderJson(999, [], '暂无数据');
         }
-        $this->renderJson(0, $res, 'OK');
+        $this->renderJson(0, ['data'=>$res, 'total'=>$count], 'OK');
 	}
     public function actionDetail()
     {

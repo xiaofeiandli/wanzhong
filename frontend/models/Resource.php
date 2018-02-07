@@ -25,6 +25,17 @@ class Resource extends Model
         }
         return $res;
     }
+    public function getCount($type)
+    {
+        $sql = "select count(*) as count from resource where type = '{$type}' and status = 0";
+        $res = Yii::$app->db->createCommand($sql)->queryAll();
+        if(isset($res[0]['count'])){
+            $res = $res[0]['count'];
+        }else{
+            $res = 0;
+        }
+        return $res;
+    }
 
     //七牛获取下载凭证
     public function _qiniuDnToken($baseUrl)
