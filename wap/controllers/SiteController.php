@@ -212,4 +212,33 @@ class SiteController extends BaseController
             'model' => $model,
         ]);
     }
+
+    
+    public function actionMv()
+    {
+        return $this->render('mv');
+    }
+
+    public function actionPlay()
+    {
+        return $this->render('play');
+    }
+
+    public function actionMusic()
+    {
+        return $this->render('music');
+    }
+    public function actionPainting()
+    {
+        return $this->render('painting');
+    }
+    public function actionCalligraphy()
+    {
+        return $this->render('calligraphy');
+    }
+    public function actionPoem()
+    {
+        return $this->render('poem');
+    }
+
 }

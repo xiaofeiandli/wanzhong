@@ -25,7 +25,7 @@ class BaseController extends Controller
         if(!(strpos($agent,"NetFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS"))){
             header("Location:".Yii::$app->params['domain']);
         }
-        echo '移动版应用加班开发中...';exit;
+        //echo '移动版应用加班开发中...';exit;
     }
     /**
      * 默认中文

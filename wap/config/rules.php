@@ -1,27 +1,10 @@
 <?php
 return [
-	'news/ajaxlist/<type:.+>/<id:.+>/<page:.+>/<last:.+>/<width:.+>'=>'news/ajaxlist',
-	'news/detail/<id:.+>'=>'news/detail',
-	'news/<type:.+>/<id:.+>'=>'news/index',
-	'resource/download/<type:.+>/<ids:.+>'=>'resource/download',
-	'forum/detail/<fid:.+>'=>'forum/detail',
-	'download/detail/<id:.+>'=>'download/detail',
-	//英文版本路由
-	'en'=>'site/index',
-	'en/site'=>'site/index',
-	'en/about'=>'about/index',
-	'en/application/media'=>'application/media',
-	'en/application/person'=>'application/person',
-	'en/application/company'=>'application/company',
-	'en/application/doapply'=>'application/doapply',
-	'en/download'=>'download/index',
-	'en/forum'=>'forum/index',
-	'en/forum/detail/<fid:.+>'=>'forum/detail',
-	'en/download/detail/<id:.+>'=>'download/detail',
-	'en/meeting'=>'meeting/index',
-	'en/news/ajaxlist/<type:.+>/<id:.+>/<page:.+>/<last:.+>/<width:.+>'=>'news/ajaxlist',
-	'en/news/detail/<id:.+>'=>'news/detail',
-	'en/news'=>'news/index',
-	'en/news/<type:.+>/<id:.+>'=>'news/index',
-	'en/resource/download/<type:.+>/<ids:.+>'=>'resource/download',
+	'mv'=>'site/mv',//mv
+	'article'=>'site/article',//文章
+	'music'=>'site/music',//音乐
+	'painting'=>'site/painting',//画作
+	'play'=>'site/play',//播放
+	'poem'=>'site/poem',//诗歌
+	'calligraphy'=>'site/calligraphy',//书法
 ];
