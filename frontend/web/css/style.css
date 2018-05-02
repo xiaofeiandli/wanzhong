@@ -33,9 +33,17 @@ body {
     font-family: Arial, 'Microsoft YaHei', SimHei;
 }
 
-.container {
-    width: 1024px;
-    margin: 0 auto;
+[v-cloak]{
+    display: none;
+}
+
+[class^="el-icon-fa"],
+[class*="el-icon-fa"] {
+    display: inline-block;
+    font-family: FontAwesome!important;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .clearfix:after {
@@ -49,7 +57,15 @@ body {
     *zoom: 1;
 }
 
-
+/*pagination*/
+.page-list{
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+.page-list .el-pagination{
+    float: right;
+}
 /*header*/
 .header{
     position: absolute;
@@ -105,17 +121,20 @@ body {
     min-height: 100%;
     padding-top: 121px;
     padding-bottom: 102px;
-	/* margin-bottom: 174px; */
 }
-
+.container {
+    position: relative;
+    width: 1024px;
+    margin: 0 auto;
+}
 /*footer*/
-
 .footer {
-    background-color: #000;
+    height: 102px;
     margin-top: -102px;
-    padding: 38px 0 44px;
     color: #fff;
     font-size: 14px;
+    line-height: 102px;
+    background-color: #000;
     text-transform: uppercase;
 }
 
@@ -125,8 +144,14 @@ body {
 
 
 /*banners*/
-
-.banners {
+.el-carousel__item img{
+    position: absolute;
+    left: 50%;
+    width: 1920px;
+    height: 100%;
+    margin-left: -960px;
+}
+/*.banners {
     position: relative;
     height: 563px;
     text-align: center;
@@ -172,11 +197,8 @@ body {
     border-radius: 5px;
     margin: 0 21px;
     background-color: rgba(58, 86, 96, .6)
-}
+}*/
 
-[v-cloak]{
-    display: none;
-}
 /*首页*/
 
 .index {
@@ -321,7 +343,8 @@ body {
     background-color: #f0f9f9;
 }
 
-.music-list table tbody tr:hover {
+.music-list table tbody tr:hover,
+.music-list table tbody tr.active{
     background-color: #c8e3eb !important;
 }
 
@@ -350,33 +373,33 @@ body {
     text-align: center;
 }
 
-.music-action span {
+.music-action .icon{
     display: inline-block;
-    width: 25px;
-    height: 25px;
+    /* width: 25px; */
+    /* height: 25px; */
+    font-size: 26px;
     cursor: pointer;
-    background: url("../images/play.png") no-repeat;
+    /* background: url("../images/play.png") no-repeat; */
 }
 
 .music-counts {
     width: 240px;
     color: #656565;
     font-size: 14px;
-    text-align: center;
-}
 
-.music-counts span {
-    position: relative;
+    text-align: center;
+    vertical-align: middle;
+}
+.music-counts span{
     padding-left: 28px;
+    position: relative;
 }
 
 .music-counts .icon {
     position: absolute;
+    top: -2px;
     left: 0;
-    top: 2px;
-    width: 20px;
-    height: 13px;
-    background: url("../images/watching-icon.png") no-repeat;
+    font-size: 20px;
 }
 
 .music-time {
@@ -414,8 +437,8 @@ body {
 
 /*画作*/
 .planting{
-	margin: 30px 0 70px;
-	padding: 28px 20px 50px;
+	margin: 30px auto 70px;
+	padding: 28px 20px 30px;
 	background-color: #fff;
 }
 .planting-item{

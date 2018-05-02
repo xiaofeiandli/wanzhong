@@ -240,5 +240,9 @@ class SiteController extends BaseController
     {
         return $this->render('poem');
     }
+    public function actionDetail()
+    {
+        return $this->render('detail');
+    }
 
 }

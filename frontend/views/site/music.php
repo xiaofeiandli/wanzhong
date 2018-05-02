@@ -7,20 +7,31 @@ $this->title = '音乐';
 			<div class="music" :style="{'min-height': height+ 'px'}">
 				<div class="list-header">
 					<span class="list-text">音乐</span>
-					<span class="list-sort">按上传时间</span>
+
+					<span class="list-sort" v-if="orderby == 'created_at'"  @click="sort('read')">按播放量</span>
+					<span class="list-sort" v-else @click="sort('created_at')">按上传时间</span>
 				</div>
 				<div class="music-list" id="music_list">
 					<table>
 						<tbody>
-							<tr v-for='(item,idx) in lists'>
-								<td class="music-order" v-text='idx'></td>
+							<tr v-for='(item,idx) in lists' >
+								<td class="music-order" v-text='idx+1'></td>
 								<td class="music-title one-hidden" v-text="item.name"></td>
-								<td class="music-action"><span @click='play(idx)'></span></td>
-								<td class="music-counts"><span><i class="icon"></i>{{item.count}}</span></td>
+								<td class="music-action"><i class="icon" :class="!item.play ? 'el-icon-fa-play-circle-o' : 'el-icon-fa-pause-circle-o' " @click='play(idx,item.id)'></i></td>
+								<td class="music-counts"><span><i class="icon el-icon-fa-eye"></i>{{item.count}}</span></td>
 								<td class="music-time">4:03</td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div class="page-list clearfix">
+					<el-pagination
+				      @current-change="pageChange"
+				      :current-page="page"
+				      :page-size="limit"
+				      layout="total, prev, pager, next, jumper"
+				      :total="total">
+		    		</el-pagination>
 				</div>
 			</div>
 		</div>

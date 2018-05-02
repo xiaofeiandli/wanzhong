@@ -17,12 +17,14 @@ $actionID = Yii::$app->controller->action->id;
     <meta content="" name="description" />
     <meta content="" name="author" />
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="/js/vendor/element-ui-2.20/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/fontawesome/fontawesome/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/js/vendor/mplayer/css/mplayer.css">
     <link rel="stylesheet" type="text/css" href="/js/vendor/mediaelement/mediaelementplayer.min.css">
     <link rel="stylesheet" type="text/css" href="/js/vendor/fancybox/jquery.fancybox.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
-	<div class="header">
+	<div class="header" id="header">
 		<div class="container clearfix">
 			<a class="header-logo" href="/">
 				<img src="/images/logo.png">
@@ -53,14 +55,14 @@ $actionID = Yii::$app->controller->action->id;
 <?= $content ?>
 <?php $this->endBody() ?>
 
-	<div class="footer">
+	<div class="footer" id="footer">
 		<div class="container">
-			<!-- <div style="margin-bottom: 52px;"><span class="footer-margin">Copyright © 2003-2018 万忠华艺 版权所有</span></div> -->
 			<div><span class="footer-margin">京ICP备18002956号</span></div>
 		</div>
 	</div>
 	<script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/vendor/vue-2.4.4/vue.min.js"></script>
+	<script type="text/javascript" src="/js/vendor/element-ui-2.20/index.js"></script>
 	
 <?php if($actionID=='painting' || $actionID=='calligraphy'){?>
 	<!--img start-->
@@ -73,7 +75,6 @@ $actionID = Yii::$app->controller->action->id;
 	
 <?php if($actionID=='music'){?>
 	<!--music start-->
-	<script type="text/javascript" src="/js/vendor/vue-2.4.4/vue.min.js"></script>
 	
 	<script type="text/javascript" src="/js/vendor/mplayer/js/mplayer.js"></script>
 	<script type="text/javascript" src="/js/vendor/mplayer/js/jquery.nstSlider.js"></script>

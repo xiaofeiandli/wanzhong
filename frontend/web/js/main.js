@@ -1,7 +1,7 @@
 // 首页轮播图
 var Index = function() {
 
-    var index = 0,
+    /*var index = 0,
         n = 0, // 计算导航图片数
         timer = null, // 定时器
         $banners = $("#banners"),
@@ -45,9 +45,31 @@ var Index = function() {
 
         $btns.removeClass('current').eq(index + 1 == len ? 0 : index + 1).addClass('current');
 
-    }
+    }*/
+    new Vue({
+        el:'#index',
+        data: function (){
+            return {
+                height: null
+            }
+        },
+        mounted: function(){
+            this.height = getHeight();
+        }
+    })
 
 };
+
+
+function getHeight(){
+    var minHeight = 400,
+        header = $("#header").height(),
+        footer = $("#footer").height(),
+        banner = $("#banners").height() || 0,
+        height = $(document).height() - header - footer - banner;
+    console.log(header,footer,banner)
+    return height > minHeight ? height : minHeight;
+}
 
 var Mv = function(){
 
@@ -96,7 +118,10 @@ var Img = function() {
         el: '#img',
         data: {
             lists: [],
-            height: 0
+            height: 0,
+            page: 1,
+            limit: 20,
+            total: null
         },
         mounted: function() {
             this.height = getHeight();
@@ -111,26 +136,28 @@ var Img = function() {
                     dataType: 'json',
                     data: {
                         type: 'image',
-                        page: 1,
-                        limit: 40
+                        page: that.page,
+                        limit: that.limit
                     },
                     success: function(res) {
                         if (res.code == 0) {
-                            that.lists = res.data;
+                            that.lists = res.data.data;
+                            that.total = Number(res.data.total);
+                            console.log(that.total)
                         }
                     }
                 })
+            },
+            handleCurrentChange: function(val){
+                this.page = val;
+                console.log(val);
+                this.getInfo();
             }
         }
     })
 };
 
-function getHeight(){
-    var minHeight = 400,
-        height = $(document).height() -323;
 
-    return height > minHeight ? height : minHeight;
-}
 
 // 书法查看
 var Write = function(){
@@ -217,7 +244,11 @@ var Music = function() {
                     }]
                 ],
                 height: 0,
-                player: ''
+                player: null,
+                total: 0,
+                page: 1,
+                limit: 10,
+                orderby: 'created_at'
             },
             mounted: function() {
                 this.height = getHeight();
@@ -233,20 +264,22 @@ var Music = function() {
                         dataType: 'json',
                         data: {
                             type: 'audio',
-                            page: 1,
-                            limit: 10
+                            page: that.page,
+                            limit: that.limit,
+                            orderby: that.orderby
                         },
                         success: function(res) {
                             if (res.code == 0) {
 
-                                that.lists = res.data;
+                                that.lists = res.data.data;
+                                that.total = Number(res.data.total);
 
-                                for(var i = 0; i < res.data.length; i++){
+                                for(var i = 0; i < res.data.data.length; i++){
                                     that.songs[0].push({
-                                        name: res.data[i].name,
+                                        name: res.data.data[i].name,
                                         singer: '万中',
-                                        src: res.data[i].path,
-                                        img: res.data[i].thumb,
+                                        src: res.data.data[i].path,
+                                        img: res.data.data[i].thumb,
                                         lrc: ''
                                     })
                                 }
@@ -257,6 +290,14 @@ var Music = function() {
                             }
                         }
                     })
+                },
+                sort: function(val){
+                    this.orderby = val;
+                    this.getInfo();
+                },
+                pageChange: function(val){
+                    this.page = val;
+                    this.getInfo();
                 },
                 createPlayer: function() {
                     var that = this;
@@ -310,7 +351,22 @@ var Music = function() {
                     });
 
                 },
-                play: function(idx) {
+                // 增加阅读数
+                addCount: function(id){
+                    $.ajax({
+                        url: '/api/read',
+                        type: 'post',
+                        data: {
+                            type: 'audio',
+                            id: id
+                        }
+                    })
+                },
+                play: function(idx,id) {
+                    
+
+                    this.addCount(id);
+
                     this.player.play(0, idx);
                 }
             }

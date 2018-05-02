@@ -2,24 +2,27 @@
 use yii\web\View;
 $this->title = '歌词';
 ?>
-    <div class="writing" id="mv" v-cloak>
-        <div class="body" :style="{'min-height': height+'px'}">
+    <div id="poem">
+        <div class="body" id="lists" v-cloak :style="{'min-height': height+'px'}">
             <div class="list-header flex flex-justify flex-align">
                 <div>
-                    <span class="list-title">歌词</span>
-                    <span class="list-title active">诗</span>
+                    <span class="list-title" @click="toggle('lyric')" :class="{active: type == 'poem'}">歌词</span>
+                    <span class="list-title" @click="toggle('poem')" :class="{active: type == 'lyric'}">诗</span>
                 </div>
-                <span class="list-sort">按上传时间</span>
+                <span class="list-sort" v-if="orderby == 'created_at'" @click="orderby = 'read'">按上传时间</span>
+                <span class="list-sort" v-if="orderby == 'read'" @click="orderby = 'created_at'">按阅读次数</span>
             </div>
-            <div class="list article-list" v-for="item in 8">
+            <div class="list article-list" v-for="item in lists">
                 <div class="list-item">
-                    <a class="list-title line-1" href="">这是一个很长的标题这是一个很长的标题</a>
+                    <a class="list-title line-1" href="">{{ item.title }}</a>
                     <div class="list-info">
-                        <span><i class="fa fa-eye"></i>5678</span>
-                        <span>2018-01-01</span>
+                        <span><i class="iconfont icon-eye"></i>{{item.read}}</span>
+                        <span><i class="iconfont icon-time"></i>{{item.created_at}}</span>
                     </div>
                 </div>
             </div>
-            <div class="loading-text">加载中...</div>
+            <div class="loading-text" v-show="loading">加载中...</div>
+            <div class="loading-text" v-show="msg" v-text="msg"></div>
+            <div class="loading-text" v-if="error" @click="getList">重新加载</div>
         </div>
     </div>
