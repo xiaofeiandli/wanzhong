@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Article;
 
 /**
  * Site controller
@@ -242,7 +243,23 @@ class SiteController extends BaseController
     }
     public function actionDetail()
     {
-        return $this->render('detail');
+        $type = Yii::$app->request->get('type');
+        $id = Yii::$app->request->get('id');
+        if(isset($type)&&in_array($type,['lyric','poem'])&&isset($id)){
+            $article_model = new Article();
+            $res = $article_model->getDetail($id);
+            if($res){
+                $res = $res[0];
+                $article_model->addReadCount($id,$res['read']);
+            }else{
+                header('location:/');
+            }
+            return $this->render('article_detail',['res'=>$res]);
+        }elseif(isset($type)&&in_array($type,['video','audio','image','calligraphy'])&&isset($id)){
+            return $this->render('detail',['type'=>$type,'id'=>$id]);
+        }
+
+        
     }
 
 }

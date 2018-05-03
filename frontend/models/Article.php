@@ -5,17 +5,19 @@ use Yii;
 use yii\base\Model;
 use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 class Article extends Model
 {
     public function getList($type,$page,$limit,$orderby)
     {
         $start = ($page-1)*$limit;
-        $sql = "select * from article where category = {$type} and status = 1 order by '{$orderby}' desc limit {$start},{$limit}";
+        $sql = "select * from article where category = {$type} and status = 1 order by `{$orderby}` desc limit {$start},{$limit}";//print_r($sql);exit;
         $res = Yii::$app->db->createCommand($sql)->queryAll();
         if(isset($res[0]['id'])){
             foreach($res as $k=>$v){
-                $res[$k]['created_at'] = date('Y/m/d H:i:s',time());
+                $res[$k]['created_at'] = date('Y/m/d H:i:s',$v['created_at']);
                 //$res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
             }
         }else{
@@ -53,11 +55,11 @@ class Article extends Model
     }
     public function getDetail($id)
     {
-        $sql = "select * from article where id = {$id}";
+        $sql = "select * from article where id = {$id} and status = 1";
         $res = Yii::$app->db->createCommand($sql)->queryAll();
         if(isset($res[0]['id'])){
             foreach($res as $k=>$v){
-                $res[$k]['created_at'] = date('Y/m/d H:i:s',time());
+                $res[$k]['created_at'] = date('Y/m/d H:i:s',$v['created_at']);
                 //$res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
             }
         }else{
@@ -65,9 +67,10 @@ class Article extends Model
         }
         return $res;
     }
-    public function addReadCount($id)
+    public function addReadCount($id,$count)
     {
-        $res = Yii::$app->db->createCommand()->update('article',['read'=>new Expression('read+1')],['id'=>$id])->execute();
+        $id=intval($id);
+        $res = Yii::$app->db->createCommand()->update('article',['read'=>$count+1],['id'=>$id])->execute();
         if($res&&$res>0){
             $status = true;
         }else{

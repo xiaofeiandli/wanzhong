@@ -17,7 +17,7 @@ class Resource extends Model
         $res = Yii::$app->db->createCommand($sql)->queryAll();
         if(isset($res[0]['id'])){
             foreach($res as $k=>$v){
-                $res[$k]['created_at'] = date('Y/m/d H:i:s',time());
+                $res[$k]['created_at'] = date('Y/m/d H:i:s',$v['created_at']);
                 $res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
             }
         }else{
@@ -59,7 +59,7 @@ class Resource extends Model
         $res = Yii::$app->db->createCommand($sql)->queryAll();
         if(isset($res[0]['id'])){
             foreach($res as $k=>$v){
-                $res[$k]['created_at'] = date('Y/m/d H:i:s',time());
+                $res[$k]['created_at'] = date('Y/m/d H:i:s',$v['created_at']);
                 $res[$k]['path'] = $this->_qiniuDnToken(Yii::$app->params['img_domain'].$v['path']);
             }
         }else{
