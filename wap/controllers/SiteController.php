@@ -241,6 +241,10 @@ class SiteController extends BaseController
     {
         return $this->render('poem');
     }
+    public function actionVideo()
+    {
+        return $this->render('video');
+    }
     public function actionDetail()
     {
         $type = Yii::$app->request->get('type');

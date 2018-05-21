@@ -8,6 +8,7 @@
 
         $bar.on("click", function() {
             var val = $(this).data("value");
+            console.log(11);
             if (val) {
                 $icon.show();
                 $nav.slideDown();
@@ -20,6 +21,7 @@
         });
 
         $(document).on("click", function(e) {
+
             var target = $(e.target).get(0),
                 bar = $bar.get(0);
 
@@ -257,6 +259,7 @@
                                 if (res.msg == '暂无数据') { // 没有数据，不再请求
 
                                     that.over = true;
+                                    res.msg = '没有更多了';
                                 }
 
                                 that.msg = res.msg;
@@ -429,6 +432,24 @@
                         }
                     })
                 }
+            }
+        })
+    }
+
+    var VideoInt = function(){
+        new Vue({
+            el:'#video',
+            data: function(){
+
+                return {
+                    height: 600
+                }
+            },
+            mounted: function(){
+
+            },
+            methods: {
+
             }
         })
     }

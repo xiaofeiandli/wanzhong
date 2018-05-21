@@ -94,6 +94,7 @@ a {
 }
 
 
+
 /*header*/
 
 header {
@@ -169,6 +170,7 @@ header .menu {
 }
 
 
+
 /*首页*/
 
 .banners {
@@ -236,6 +238,7 @@ header .menu {
     width: 4.4rem;
     height: 4.8rem;
 }
+
 
 
 /*mv*/
@@ -311,7 +314,7 @@ header .menu {
 }
 
 .mv-item .mv-info .mv-watch i {
-	font-size: .4277rem;
+    font-size: .4277rem;
     margin-right: .2rem;
 }
 
@@ -320,6 +323,7 @@ header .menu {
     text-align: center;
     font-size: .4rem;
 }
+
 
 
 /*music*/
@@ -390,7 +394,8 @@ header .menu {
 }
 
 .image-item .image {
-    width: 100%;
+    width: 9rem;
+    height: 5.0586rem;
 }
 
 .image-item .image-title {
@@ -406,6 +411,7 @@ header .menu {
     line-height: .7rem;
     background: url("../images/title-mask.png") repeat-x;
 }
+
 
 
 /*文章列表*/
@@ -440,12 +446,16 @@ header .menu {
 }
 
 
+
 /*播放器*/
 
 .aplayer-music {
     line-height: 20px;
 }
+
+
 /*文章详情*/
+
 .article {
     position: relative;
     margin: .32rem .4rem;
@@ -521,6 +531,64 @@ header .menu {
 .article .article h6 {
     font-weight: normal;
     font-size: .4267rem;
+}
+
+
+/*mv详情*/
+
+.video-container {
+    width: 10rem;
+    height: 5.625rem;
+    background: #000;
+}
+
+.video-player {
+    width: 10rem;
+    height: 5.625rem;
+}
+
+.mejs__cannotplay {
+    margin-top: 2.4rem;
+    text-align: center;
+    font-size: .4rem !important;
+}
+
+.summary {
+    margin-top: .2rem;
+    color: #4a4a4a;
+    font-size: .3733rem;
+    line-height: 1.5;
+    text-align: justify;
+    word-break: break-all;
+}
+
+.video-list {
+    width: 10rem;
+    padding: 0 .32rem;
+}
+
+.video-item {
+    margin-bottom: .32rem;
+}
+
+.video-item a {
+    display: block;
+    line-height: 0;
+    font-size: 0;
+}
+
+.video-item .video-thumb {
+    width: 4.48rem;
+    height: 2.52rem;
+}
+
+.video-item .video-title {
+    width: 4.48rem;
+    height: 1.0667rem;
+    margin-top: .2rem;
+    line-height: 1.42;
+    color: #414141;
+    font-size: .3733rem;
 }
 
 

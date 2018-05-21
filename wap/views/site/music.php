@@ -15,7 +15,7 @@ $this->title = '音乐';
                     <div>
                         <a class="music-title line-1" href="">{{item.name}}</a>
                         <div class="music-info">
-                            <span><i class="iconfont icon-time"></i>6:00</span>
+                            <!-- <span><i class="iconfont icon-time"></i>6:00</span> -->
                             <span><i class="iconfont icon-eye"></i>{{item.count}}</span>
                         </div>
                     </div>

@@ -14,10 +14,10 @@ $this->title = '歌词';
             </div>
             <div class="list article-list" v-for="item in lists">
                 <div class="list-item">
-                    <a class="list-title line-1" href="">{{ item.title }}</a>
+                    <a class="list-title line-1" :href="'/detail/'+type+'/'+item.id">{{ item.title }}</a>
                     <div class="list-info">
                         <span><i class="iconfont icon-eye"></i>{{item.read}}</span>
-                        <span><i class="iconfont icon-time"></i>{{item.created_at}}</span>
+                        <span><i class="iconfont icon-time"></i>{{item.created_at.split(' ')[0]}}</span>
                     </div>
                 </div>
             </div>
