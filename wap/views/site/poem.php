@@ -2,8 +2,9 @@
 use yii\web\View;
 $this->title = '歌词';
 ?>
-    <div id="poem">
+    <div>
         <div class="body" id="lists" v-cloak :style="{'min-height': height+'px'}">
+            <input id="type" type="hidden" value="lyric">
             <div class="list-header flex flex-justify flex-align">
                 <div>
                     <span class="list-title" @click="toggle('lyric')" :class="{active: type == 'poem'}">歌词</span>

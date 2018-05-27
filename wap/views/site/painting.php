@@ -2,8 +2,10 @@
 use yii\web\View;
 $this->title = '画作';
 ?>
-    <div class="painting" id="pic">
+    <div class="painting">
         <div class="body" id="lists" v-cloak :style="{'min-height': height+'px'}">
+            <input id="type" type="hidden" value="image">
+
             <div class="list-header flex flex-justify flex-align">
                 <span class="list-title">画作</span>
                 <span class="list-sort" v-if="orderby == 'created_at'" @click="orderby = 'read'">按上传时间</span>

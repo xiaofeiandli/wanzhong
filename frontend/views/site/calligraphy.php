@@ -4,8 +4,9 @@ $this->title = '书法';
 ?>
 	<div class="body bg-color" id="lists">
 		<div class="container">
-			<div class="planting" id="writing" :style="{'min-height': height+ 'px'}">
+			<div class="planting" :style="{'min-height': height+ 'px'}">
 			<div class="clearfix">
+				<input id="type" type="hidden" value="calligraphy">
 				<div v-for="item in lists" class="planting-item">
 					<a class="fancybox" rel='group' :href="item.path" :title="item.name">
 					<img :src="item.path" >

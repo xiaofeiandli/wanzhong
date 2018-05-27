@@ -10,7 +10,6 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\Article;
 use frontend\models\Resource;
-
 /**
  * Site controller
  */
@@ -220,9 +219,9 @@ class SiteController extends BaseController
         return $this->render('mv');
     }
 
-    public function actionPlay()
+    public function actionVideo()
     {
-        return $this->render('play');
+        return $this->render('video');
     }
 
     public function actionMusic()
@@ -240,6 +239,11 @@ class SiteController extends BaseController
     public function actionPoem()
     {
         return $this->render('poem');
+    }
+
+    public function actionArticle()
+    {   
+        return $this->render('article_detail');
     }
 
 }

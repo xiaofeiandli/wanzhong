@@ -2,8 +2,10 @@
 use yii\web\View;
 $this->title = '书法';
 ?>
-    <div class="writing" id="writing">
+    <div class="writing">
         <div class="body" id="lists" v-cloak :style="{'min-height': height+'px'}">
+            <input id="type" type="hidden" value="calligraphy">
+
             <div class="list-header flex flex-justify flex-align">
                 <span class="list-title">书法</span>
                 <span class="list-sort" v-if="orderby == 'created_at'" @click="orderby = 'read'">按上传时间</span>

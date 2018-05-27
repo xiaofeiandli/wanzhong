@@ -2,8 +2,9 @@
 use yii\web\View;
 $this->title = 'MV';
 ?>
-    <div class="mv" id="mv">
+    <div class="mv">
         <div class="body" id="lists" v-cloak  :style="{'min-height': height+'px'}">
+            <input id="type" type="hidden" value="video">
             <div class="list-header flex flex-justify flex-align">
                 <span class="list-title">MV</span>
                 <span class="list-sort" v-if="orderby == 'created_at'" @click="orderby = 'read'">按上传时间</span>
@@ -17,7 +18,7 @@ $this->title = 'MV';
                         </a>
                     </div>
                     <div class="mv-info">
-                        <a class="mv-title" :href="'/mv/play#'+item.id"><span class="line-2">{{item.name}}</span></a>
+                        <a class="mv-title" :href="'/video/'+item.id"><span class="line-2">{{item.name}}</span></a>
                         <div class="mv-watch">
                             <i class="iconfont icon-eye"></i>{{item.count}}
                         </div>

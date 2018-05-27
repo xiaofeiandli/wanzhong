@@ -31,7 +31,7 @@ var Index = function() {
 };
 
 // mv播放
-var Play = function() {
+var Video = function() {
 
     $("#player").mediaelementplayer({
         autoplay: true,
@@ -41,6 +41,7 @@ var Play = function() {
         //audioVolume: 'horizontal',
         startVolume: 0.6, // 播放的初始音量
         success: function() {
+            console.log(111);
             //console.log(arguments)
         },
         error: function() {
@@ -50,8 +51,6 @@ var Play = function() {
         videoWidth: 734,
         videoHeight: 490
     });
-
-
 }
 
 
@@ -66,7 +65,7 @@ var listInt = function(type) {
                 orderby: 'created_at',
                 height: 300,
                 page: 1,
-                limit: 5,
+                limit: 10,
                 total: null,
                 lists: [],
                 player: null,
@@ -378,21 +377,11 @@ var listInt = function(type) {
 }
 
 $(document).ready(function() {
+    var type = $("#type").val();
+    
     $("#index").get(0) && Index();
 
-    //$("#video").get(0) && Mv();
+    type && listInt(type);
 
-    $("#img").get(0) && listInt('image');
-
-
-    $("#music").get(0) && listInt('audio');
-
-    $("#play_page").get(0) && Play();
-
-    $("#poem").get(0) && listInt('lyric');
-
-    $("#video").get(0) && listInt('video');
-
-    $("#writing").get(0) && listInt('calligraphy');
-
+    //$("#video_page").get(0) && Video();
 })

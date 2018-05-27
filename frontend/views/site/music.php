@@ -4,13 +4,15 @@ $this->title = '音乐';
 ?>
 	<div class="body bg-color" id="lists" v-cloak>
 		<div class="container">
-			<div class="music" id="music" :style="{'min-height': height+ 'px'}">
+			<div class="music" :style="{'min-height': height+ 'px'}">
 				<div class="list-header">
 					<span class="list-text">音乐</span>
 					<span class="list-sort" v-if="orderby == 'created_at'" @click="orderby = 'read'">按上传时间</span>
                 	<span class="list-sort" v-if="orderby == 'read'" @click="orderby = 'created_at'">按播放热度</span>
 				</div>
 				<div class="music-list">
+					<input id="type" type="hidden" value="audio">
+
 					<table>
 						<tbody>
 							<tr v-for='(item,idx) in lists' >

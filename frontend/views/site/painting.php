@@ -4,7 +4,9 @@ $this->title = '画';
 ?> 
 	<div class="body bg-color" id="lists" v-cloak>
 		<div class="container planting">
-			<div class="clearfix" id="img" :style="{'min-height': height+ 'px'}">
+			<input id="type" type="hidden" value="image">
+
+			<div class="clearfix" :style="{'min-height': height+ 'px'}">
 				<template v-if="lists.length > 0">
 					<div v-for="item in lists" class="planting-item">
 						<a class="fancybox" rel='group' :href="item.path" :title="item.name">

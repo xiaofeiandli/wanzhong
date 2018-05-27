@@ -14,7 +14,13 @@ $actionID = Yii::$app->controller->action->id;
     <meta content="telephone=no,email=no" name="format-detection">
     <script src="/js/flexible.js" type="text/javascript"></script>
     <link href="/css/icon/iconfont.css" rel="stylesheet">
+    <?php if($actionID=='music'){?>
     <link rel="stylesheet" type="text/css" href="/js/vendor/APlayer/APlayer.min.css">
+    <?php }?>
+    <?php if($actionID=='video'){?>
+    <link rel="stylesheet" type="text/css" href="/js/vendor/mediaelement/mediaelementplayer.min.css"></link>
+    <?php }?>
+
     <link href="/css/m-style.css" rel="stylesheet">
     <title><?= Html::encode($this->title) ?></title>
     <meta name="keywords" content="" />
@@ -63,9 +69,15 @@ $actionID = Yii::$app->controller->action->id;
     </footer>
     <script src="/js/vendor/jquery.min.js" type="text/javascript"></script>
 	<script src="/js/vendor/vue-2.4.4/vue.min.js" type="text/javascript"></script>
+<?php if($actionID=='music'){?>
     <script src="/js/vendor/APlayer/APlayer.min.js" type="text/javascript"></script>
+<?php }?>
+<?php if($actionID=='video'){?>
+    <script src="/js/vendor/mediaelement/mediaelement-and-player.min.js" type="text/javascript"></script>
+
+<?php }?>
+
 	<script src="/js/m-main.js" type="text/javascript"></script>
-    <!-- <script src="/js/vendor/masonry.pkgd.min.js" type="text/javascript"></script> -->
 </body>
 </html>
 <?php $this->endPage() ?>

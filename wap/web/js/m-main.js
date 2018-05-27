@@ -446,32 +446,42 @@
                 }
             },
             mounted: function(){
-
+                this.play();
             },
             methods: {
+                play: function(){
 
+                    $("#video_player").mediaelementplayer({
+                        autoplay: true,
+                        alwaysShowControls: true,
+                        features: ['playpause', 'current', 'progress', 'duration', 'volume', 'fullscreen'],
+                        poster: "", // 封面
+                        //audioVolume: 'horizontal',
+                        startVolume: 0.6, // 播放的初始音量
+                        success: function() {
+                            console.log(111);
+                            //console.log(arguments)
+                        },
+                        error: function() {
+                            console.log("加载失败")
+                        }
+                    });
+                }
             }
         })
     }
     $(document).ready(function() {
+        var type = $("#type").val();
         // 导航
         navBar();
 
+        type && listInt(type);
+
+        $("#video").get(0) && VideoInt();
+
         $("#index").get(0) && Index();
 
-        $("#music").get(0) && listInt('audio');
-
-
-        $("#mv").get(0) && listInt('video');
-
-
-        $("#pic").get(0) && listInt('image');
-
-        $("#writing").get(0) && listInt('calligraphy');
-
-        $("#poem").get(0) && listInt('lyric');
-
-        $("#detail").get(0) && detailInt();
+        //$("#detail").get(0) && detailInt();
     })
 
 })()

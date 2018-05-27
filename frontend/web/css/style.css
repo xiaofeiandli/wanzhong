@@ -546,15 +546,23 @@ body {
 	height: 490px;
 	background-color: #fff;
 }
+.player .video{
+    width: 734px;
+    height: 490px;
+}
 .play-list{
 	margin-left: 754px;
-	padding: 22px 15px 15px 10px;
+	padding: 18px 15px 15px 10px;
 	width: 270px;
 	height: 490px;
+    overflow-y: auto;
 	background-color: #fff;
 }
 .play-list .play-item{
 	margin-bottom: 12px;
+}
+.play-list .play-item:last-child{
+    margin-bottom: 0;
 }
 .play-item .play-thumb{
 	float: left;
@@ -585,14 +593,12 @@ body {
 }
 .my-icon{
 	position: relative;
-	padding-left: 28px;
+	padding-left: 25px;
 }
-.my-icon .icon{
+.my-icon .iconfont{
 	position: absolute;
 	left: 0;
-	width: 20px;
-	height: 13px;
-	background: url("../images/watching-icon.png") no-repeat;
+    top: -1px;
 }
 
 

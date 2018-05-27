@@ -2,7 +2,7 @@
 use yii\web\View;
 $this->title = 'MV';
 ?>
-<div class="body bg-color" id="video">
+<div class="body bg-color">
 	<div class="container">
 		<div class="mv" id="lists"  :style="{'min-height': height+ 'px'}">
 			<div class="list-header">
@@ -11,10 +11,11 @@ $this->title = 'MV';
                 <span class="list-sort" v-if="orderby == 'read'" @click="orderby = 'created_at'">按查看次数</span>
 			</div> 
 			<div class="mv-list clearfix">
+				<input id="type" type="hidden" value="video">
 				<template v-if="lists.length >0">
 					<div class="mv-item" v-for="item in lists"> 
 						<div class="mv-thumb">
-							<a href="" :title="item.title">
+							<a :href="'/video'" :title="item.title">
 								<img src="/images/mv-thumb.png">
 							</a>
 						</div>
@@ -22,7 +23,7 @@ $this->title = 'MV';
 							<a href="" :title="item.name" v-text="item.name.length> 15 ? item.name.slice(0,13)+'...' : item.name"></a>
 						</div>
 						<div class="mv-info clearfix">
-							<span class="mv-watching"><i class="icon"></i> {{item.count}}</span>
+							<span class="mv-watching"><i class="iconfont icon-eye"></i> {{item.count}}</span>
 							<span class="mv-time">{{item.created_at.split(' ')[0]}}</span>
 						</div>
 					</div>

@@ -11,13 +11,6 @@ $this->title = 'MV详情';
         </div>
         <div class="article">
             <h1>MV视频标题</h1>
-            <!--<div class="info">
-                <span>视频来源</span>
-                <span>2018-04-01</span>
-            </div>
-            <div class="summary">
-                视频概要
-            </div>-->
             <div class="line"></div>
         </div>
         <div class="video-list flex flex-wrap flex-justify">

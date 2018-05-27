@@ -220,11 +220,6 @@ class SiteController extends BaseController
         return $this->render('mv');
     }
 
-    public function actionPlay()
-    {
-        return $this->render('play');
-    }
-
     public function actionMusic()
     {
         return $this->render('music');
@@ -245,6 +240,7 @@ class SiteController extends BaseController
     {
         return $this->render('video');
     }
+    
     public function actionDetail()
     {
         $type = Yii::$app->request->get('type');
@@ -262,8 +258,6 @@ class SiteController extends BaseController
         }elseif(isset($type)&&in_array($type,['video','audio','image','calligraphy'])&&isset($id)){
             return $this->render('detail',['type'=>$type,'id'=>$id]);
         }
-
         
     }
-
 }

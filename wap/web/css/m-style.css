@@ -590,8 +590,20 @@ header .menu {
     color: #414141;
     font-size: .3733rem;
 }
-
-
+/*error-page*/
+.error-page{
+    position: relative;
+    height: 100%;
+    margin-bottom: -1rem;
+    text-align: center;
+    font-size: .4rem;
+}
+.error-page h1{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -1.5rem;
+}
 /*底部*/
 
 footer {

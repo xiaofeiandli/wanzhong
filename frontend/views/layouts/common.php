@@ -17,12 +17,18 @@ $actionID = Yii::$app->controller->action->id;
     <meta content="" name="description" />
     <meta content="" name="author" />
     <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="/js/vendor/element-ui-2.20/index.css">
-    <link href="/css/icon/iconfont.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/js/vendor/APlayer/APlayer.min.css">
-    <link rel="stylesheet" type="text/css" href="/js/vendor/mediaelement/mediaelementplayer.min.css">
-    <link rel="stylesheet" type="text/css" href="/js/vendor/fancybox/jquery.fancybox.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="/js/vendor/element-ui-2.20/index.css">
+    <link rel="stylesheet" href="/css/icon/iconfont.css" >
+<?php if($actionID=='video'){?>
+    <link rel="stylesheet" href="/js/vendor/mediaelement/mediaelementplayer.min.css">
+<?php }?> 
+<?php if($actionID=='music'){?>
+    <link rel="stylesheet" href="/js/vendor/APlayer/APlayer.min.css">
+<?php }?> 
+<?php if($actionID=='painting' || $actionID=='calligraphy'){?>
+    <link rel="stylesheet" href="/js/vendor/fancybox/jquery.fancybox.css">
+<?php }?> 
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 	<div class="header" id="header">
 		<div class="container clearfix">
@@ -79,7 +85,7 @@ $actionID = Yii::$app->controller->action->id;
 	<!--music end-->
 <?php }?>
 	
-<?php if($actionID=='play'){?>
+<?php if($actionID=='video'){?>
 	<!--mv start-->
 	<script type="text/javascript" src="/js/vendor/mediaelement/mediaelement-and-player.min.js"></script>
 	<!--mv end-->
