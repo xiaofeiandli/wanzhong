@@ -67,10 +67,10 @@ class Article extends Model
         }
         return $res;
     }
-    public function addReadCount($id,$count)
+    public function addReadCount($id)
     {
         $id=intval($id);
-        $res = Yii::$app->db->createCommand()->update('article',['read'=>$count+1],['id'=>$id])->execute();
+        $res = Yii::$app->db->createCommand()->update('article',['read'=>new Expression('`read`+1')],['id'=>$id])->execute();
         if($res&&$res>0){
             $status = true;
         }else{

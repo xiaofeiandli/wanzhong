@@ -15,7 +15,7 @@ $this->title = 'MV';
 				<template v-if="lists.length >0">
 					<div class="mv-item" v-for="item in lists"> 
 						<div class="mv-thumb">
-							<a :href="'/video'" :title="item.title">
+							<a :href="'/detail/'+type+'/'+item.id" :title="item.title">
 								<img src="/images/mv-thumb.png">
 							</a>
 						</div>
@@ -27,9 +27,6 @@ $this->title = 'MV';
 							<span class="mv-time">{{item.created_at.split(' ')[0]}}</span>
 						</div>
 					</div>
-				</template>
-				<template v-else>
-					<div class="empty-tip">暂无内容，请稍后访问。</div>
 				</template>
 			</div>
 			<div class="empty-tip" v-show="loading">加载中...</div>

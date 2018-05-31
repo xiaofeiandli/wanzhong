@@ -15,7 +15,7 @@ $this->title = '诗';
 					<input id="type" type="hidden" value="lyric">
 
 					<div class="poem-item" v-for="item in lists">
-						<div class="poem-title one-hidden"><a :href="'/article/'+type+'/'+item.id" target="_blank" v-text="item.title" :title="item.title"></a></div>
+						<div class="poem-title one-hidden"><a :href="'/detail/'+type+'/'+item.id" target="_blank" v-text="item.title" :title="item.title"></a></div>
 						<div class="poem-info">
 							<span class="poem-watching"><i class="iconfont icon-eye"></i>{{ item.read }}</span>
 							<span class="poem-time" v-text="item.created_at.split(' ')[0]"></span>

@@ -241,9 +241,36 @@ class SiteController extends BaseController
         return $this->render('poem');
     }
 
-    public function actionArticle()
-    {   
-        return $this->render('article_detail');
+    public function actionDetail()
+    {
+        $id = Yii::$app->request->get('id');
+        $type = Yii::$app->request->get('type','lyric');
+        if(!in_array($type, ['lyric','poem','video','audio','image','calligraphy'])){
+            header('location:/'.$type);
+            exit;
+        }
+        $article_model = new Article();
+        $resource_model = new Resource();
+        if(in_array($type, ['lyric','poem'])){
+            $res = $article_model->getDetail($id);
+            $article_model->addReadCount($id);
+        }elseif(in_array($type, ['video','audio','image','calligraphy'])){
+            $res = $resource_model->getDetail($id);
+            $resource_model->addReadCount($id);
+        }else{
+            $res = false;
+        }
+        if(!isset($res[0])){
+            header('location:/'.$type);
+            exit;
+        }
+        if(in_array($type, ['lyric','poem'])){
+            return $this->render('article_detail',['data'=>$res[0]]);
+        }else{
+            $list = $resource_model->getList($type,1,10,'');
+            return $this->render('video',['data'=>$res[0],'list'=>$list]);
+        }
+        
     }
 
 }

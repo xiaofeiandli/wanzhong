@@ -127,7 +127,7 @@ class ResourceController extends BaseController
         $uploadMgr = new UploadManager();
         // 调用 UploadManager 的 putFile 方法进行文件的上传。
         list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
-        if ($err !== null) {print_r($err);exit;
+        if ($err !== null) {
             $this->renderJson(999, $err, '网络异常');
         } else {
             if(isset($ret['key'])){

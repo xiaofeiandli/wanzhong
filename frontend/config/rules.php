@@ -7,4 +7,5 @@ return [
 	'video'=>'site/video',//播放
 	'poem'=>'site/poem',//诗歌
 	'calligraphy'=>'site/calligraphy',//书法
+	'detail/<type:.+>/<id:.+>'=>'site/detail',//详情
 ];
